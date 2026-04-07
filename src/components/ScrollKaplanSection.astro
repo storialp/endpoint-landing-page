@@ -248,22 +248,20 @@
     return lerp(outMin, outMax, t);
   };
 
-  const section = document.querySelector("[data-kaplan-track]") as HTMLElement | null;
-  if (section) {
-    const stage = section.querySelector("[data-kaplan-stage]") as HTMLElement | null;
-    const visual = section.querySelector("[data-visual]") as HTMLElement | null;
-    const rect = section.querySelector("[data-kaplan-rect]") as SVGElement | null;
-    const mask = section.querySelector("[data-square-mask]") as HTMLElement | null;
-    const chartShell = section.querySelector("[data-chart-shell]") as HTMLElement | null;
-    const canvas = section.querySelector("[data-kaplan-canvas]") as HTMLCanvasElement | null;
-    const primaryCopy = section.querySelector("[data-copy-primary]") as HTMLElement | null;
-    const secondaryCopy = section.querySelector("[data-copy-secondary]") as HTMLElement | null;
+    const section = document.querySelector("[data-kaplan-track]") as HTMLElement | null;
+    if (section) {
+        const rect = section.querySelector("[data-kaplan-rect]") as SVGElement | null;
+        const mask = section.querySelector("[data-square-mask]") as HTMLElement | null;
+        const chartShell = section.querySelector("[data-chart-shell]") as HTMLElement | null;
+        const canvas = section.querySelector("[data-kaplan-canvas]") as HTMLCanvasElement | null;
+        const primaryCopy = section.querySelector("[data-copy-primary]") as HTMLElement | null;
+        const secondaryCopy = section.querySelector("[data-copy-secondary]") as HTMLElement | null;
 
-    interface ChartDataPoint {
-      time: number;
-      treatment: number;
-      control: number;
-    }
+        interface ChartDataPoint {
+            time: number;
+            treatment: number;
+            control: number;
+        }
 
     const chartData: ChartDataPoint[] = [
       { time: 0, treatment: 1.0, control: 1.0 },
@@ -310,12 +308,6 @@
     let rafId = 0;
     let chartAnimationStart = 0;
     let chartActive = false;
-
-    const getBaseSize = () => {
-      const viewportSize = Math.min(window.innerWidth, window.innerHeight);
-      const maxVisualSize = Math.min(window.innerWidth * 0.52, 544);
-      return Math.min(viewportSize * 0.65, maxVisualSize);
-    };
 
     const updateScrollTarget = () => {
       const rectBounds = section.getBoundingClientRect();
