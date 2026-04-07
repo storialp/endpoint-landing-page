@@ -1,0 +1,150 @@
+---
+interface Props {
+    zIndex?: number;
+    speed?: number;
+    colorMode?: "Default" | "Blue" | "White" | "Greenish";
+}
+
+const { zIndex = 1, speed = 0.003, colorMode = "Default" } = Astro.props;
+---
+
+<div
+    class="sphere-canvas-container"
+    data-z-index={zIndex}
+    data-speed={speed}
+    data-color-mode={colorMode}
+    style={`z-index: ${zIndex};`}
+>
+    <canvas class="sphere-canvas"></canvas>
+</div>
+
+<style>
+    .sphere-canvas-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        pointer-events: none;
+    }
+
+    .sphere-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+</style>
+
+<script>
+    const colorPalettes = {
+        Default: [
+            { r: 180, g: 200, b: 240 },
+            { r: 160, g: 190, b: 235 },
+            { r: 140, g: 180, b: 230 },
+            { r: 120, g: 170, b: 225 },
+            { r: 90, g: 130, b: 190 },
+        ],
+        Blue: [
+            { r: 255, g: 255, b: 255 },
+            { r: 77, g: 127, b: 255 },
+            { r: 0, g: 81, b: 255 },
+        ],
+        White: [
+            { r: 255, g: 255, b: 255 },
+            { r: 240, g: 240, b: 240 },
+            { r: 220, g: 220, b: 220 },
+        ],
+        Greenish: [
+            { r: 232, g: 255, b: 222 },
+            { r: 200, g: 240, b: 200 },
+            { r: 180, g: 230, b: 180 },
+        ],
+    } as const;
+
+    type ColorMode = keyof typeof colorPalettes;
+
+    const containers = document.querySelectorAll('.sphere-canvas-container');
+
+    containers.forEach((container) => {
+        const htmlContainer = container as HTMLElement;
+        const canvas = htmlContainer.querySelector('.sphere-canvas') as HTMLCanvasElement;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const speed = parseFloat(htmlContainer.dataset.speed || '0.003');
+        const colorMode = (htmlContainer.dataset.colorMode || 'Default') as ColorMode;
+        const colors = colorPalettes[colorMode] || colorPalettes.Default;
+
+        let width = 0;
+        let height = 0;
+        let t = 0;
+
+        function resize() {
+            const rect = container.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            ctx?.setTransform(1, 0, 0, 1, 0, 0);
+            ctx?.scale(dpr, dpr);
+        }
+
+        function draw() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            t += speed;
+
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(centerX, centerY) * 0.9;
+            const waves = 3;
+            const lines = 40;
+
+            for (let wave = 0; wave < waves; wave++) {
+                const offset = (wave / waves) * Math.PI * 2;
+                const wavePhase = t + offset;
+
+                for (let i = 0; i < lines; i++) {
+                    const phase = (i / lines) * Math.PI * 2;
+                    const opacity = 0.3 + 0.3 * Math.sin(phase * 3 + t * 2);
+                    const color = colors[(i + wave * 5) % colors.length];
+                    ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${opacity})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+
+                    for (let angle = 0; angle <= Math.PI * 2; angle += 0.02) {
+                        const d1 = 0.15 * Math.sin(angle * 4 + wavePhase + phase);
+                        const d2 = 0.1 * Math.sin(angle * 7 + wavePhase * 0.5 - phase * 2);
+                        const d3 = 0.05 * Math.sin(angle * 10 - wavePhase * 0.7 + phase);
+                        const distortion = d1 + d2 + d3;
+                        const r = radius * (0.8 + distortion);
+                        const x = centerX + r * Math.cos(angle);
+                        const y = centerY + r * Math.sin(angle);
+                        angle === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                    }
+
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+            }
+
+            const glow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius * 0.5);
+            glow.addColorStop(0, "rgba(180, 200, 240, 0.1)");
+            glow.addColorStop(1, "rgba(180, 200, 240, 0)");
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+    });
+</script>
