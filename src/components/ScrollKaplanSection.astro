@@ -234,26 +234,38 @@
 </style>
 
 <script>
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-  const lerp = (start, end, amount) => start + (end - start) * amount;
-  const mapRange = (value, inMin, inMax, outMin, outMax) => {
+  const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+  const lerp = (start: number, end: number, amount: number) => start + (end - start) * amount;
+  const mapRange = (
+    value: number,
+    inMin: number,
+    inMax: number,
+    outMin: number,
+    outMax: number
+  ) => {
     if (inMax === inMin) return outMin;
     const t = clamp((value - inMin) / (inMax - inMin), 0, 1);
     return lerp(outMin, outMax, t);
   };
 
-  const section = document.querySelector("[data-kaplan-track]");
+  const section = document.querySelector("[data-kaplan-track]") as HTMLElement | null;
   if (section) {
-    const stage = section.querySelector("[data-kaplan-stage]");
-    const visual = section.querySelector("[data-visual]");
-    const rect = section.querySelector("[data-kaplan-rect]");
-    const mask = section.querySelector("[data-square-mask]");
-    const chartShell = section.querySelector("[data-chart-shell]");
-    const canvas = section.querySelector("[data-kaplan-canvas]");
-    const primaryCopy = section.querySelector("[data-copy-primary]");
-    const secondaryCopy = section.querySelector("[data-copy-secondary]");
+    const stage = section.querySelector("[data-kaplan-stage]") as HTMLElement | null;
+    const visual = section.querySelector("[data-visual]") as HTMLElement | null;
+    const rect = section.querySelector("[data-kaplan-rect]") as SVGElement | null;
+    const mask = section.querySelector("[data-square-mask]") as HTMLElement | null;
+    const chartShell = section.querySelector("[data-chart-shell]") as HTMLElement | null;
+    const canvas = section.querySelector("[data-kaplan-canvas]") as HTMLCanvasElement | null;
+    const primaryCopy = section.querySelector("[data-copy-primary]") as HTMLElement | null;
+    const secondaryCopy = section.querySelector("[data-copy-secondary]") as HTMLElement | null;
 
-    const chartData = [
+    interface ChartDataPoint {
+      time: number;
+      treatment: number;
+      control: number;
+    }
+
+    const chartData: ChartDataPoint[] = [
       { time: 0, treatment: 1.0, control: 1.0 },
       { time: 1, treatment: 0.985, control: 0.975 },
       { time: 2, treatment: 0.97, control: 0.95 },
@@ -323,16 +335,16 @@
     };
 
     const drawStepCurve = (
-      ctx,
-      data,
-      yKey,
-      color,
-      margin,
-      chartWidth,
-      chartHeight,
-      maxX,
-      minY,
-      lineWidth
+      ctx: CanvasRenderingContext2D,
+      data: ChartDataPoint[],
+      yKey: "treatment" | "control",
+      color: string,
+      margin: { top: number; right: number; bottom: number; left: number },
+      chartWidth: number,
+      chartHeight: number,
+      maxX: number,
+      minY: number,
+      lineWidth: number
     ) => {
       if (data.length < 2) return;
       const points = data.map((point) => ({
@@ -356,7 +368,7 @@
       ctx.shadowBlur = 0;
     };
 
-    const drawChart = (progress) => {
+    const drawChart = (progress: number) => {
       if (!canvas || !chartShell) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
@@ -493,7 +505,7 @@
       ctx.fillText("Control", legendX + 18, legendY + 24);
     };
 
-    const updateChartState = (progress) => {
+    const updateChartState = (progress: number) => {
       const shouldBeActive = progress >= 0.755;
       if (shouldBeActive && !chartActive) {
         chartActive = true;
@@ -505,7 +517,7 @@
       }
     };
 
-    const render = (time) => {
+    const render = (time: number) => {
       smoothProgress = lerp(smoothProgress, targetProgress, 0.11);
 
       const drawProgress = mapRange(smoothProgress, 0, 0.7, 0, 1);
@@ -513,18 +525,24 @@
       const chartOpacity = mapRange(smoothProgress, 0.755, 0.76, 0, 1);
       const maskOpacity = mapRange(smoothProgress, 0.74, 0.75, 0, 1);
 
-      rect.style.strokeDasharray = "1";
-      rect.style.strokeDashoffset = `${1 - drawProgress}`;
-      rect.style.strokeWidth = `${strokeWidth}`;
-      rect.style.stroke = smoothProgress >= 0.75 ? "#ffffff" : "url(#kaplan-gradient)";
-      mask.style.opacity = `${maskOpacity}`;
-      chartShell.style.opacity = `${chartOpacity}`;
+      if (rect) {
+        rect.style.strokeDasharray = "1";
+        rect.style.strokeDashoffset = `${1 - drawProgress}`;
+        rect.style.strokeWidth = `${strokeWidth}`;
+        rect.style.stroke = smoothProgress >= 0.75 ? "#ffffff" : "url(#kaplan-gradient)";
+      }
+      if (mask) mask.style.opacity = `${maskOpacity}`;
+      if (chartShell) chartShell.style.opacity = `${chartOpacity}`;
 
-      primaryCopy.classList.toggle("is-active", smoothProgress < 0.74);
-      primaryCopy.classList.toggle("is-muted", smoothProgress >= 0.74);
-      primaryCopy.classList.toggle("is-hidden", smoothProgress >= 0.76);
-      secondaryCopy.classList.toggle("is-active", smoothProgress >= 0.74);
-      secondaryCopy.classList.toggle("is-muted", smoothProgress < 0.55);
+      if (primaryCopy) {
+        primaryCopy.classList.toggle("is-active", smoothProgress < 0.74);
+        primaryCopy.classList.toggle("is-muted", smoothProgress >= 0.74);
+        primaryCopy.classList.toggle("is-hidden", smoothProgress >= 0.76);
+      }
+      if (secondaryCopy) {
+        secondaryCopy.classList.toggle("is-active", smoothProgress >= 0.74);
+        secondaryCopy.classList.toggle("is-muted", smoothProgress < 0.55);
+      }
 
       updateChartState(smoothProgress);
       if (chartActive) {
