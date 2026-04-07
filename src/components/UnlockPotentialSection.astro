@@ -236,8 +236,17 @@
 </section>
 
 <style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   .unlock-section {
-    padding: clamp(3rem, 5vw, 5rem) 0 clamp(4rem, 6vw, 6rem);
+    width: calc(100% + (var(--shell-inline, 0px) * 2));
+    margin-left: calc(var(--shell-inline, 0px) * -1);
+    padding:
+      clamp(3rem, 5vw, 5rem)
+      var(--shell-inline, 4rem)
+      clamp(4rem, 6vw, 6rem);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -247,26 +256,29 @@
   }
 
   .unlock-layout {
-    width: min(1680px, calc(100vw - 5rem));
+    width: 100%;
+    max-width: 1440px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(260px, 0.75fr) minmax(500px, 1.25fr);
-    gap: clamp(2rem, 4vw, 4rem);
+    grid-template-columns: minmax(280px, 0.62fr) minmax(520px, 1.38fr);
+    gap: clamp(2rem, 3vw, 3.25rem);
     align-items: center;
   }
 
   .unlock-copy {
-    padding-left: clamp(0rem, 1vw, 1rem);
+    padding-left: 0;
   }
 
   .unlock-heading {
     margin: 0;
-    max-width: 8ch;
+    max-width: 11ch;
     color: #23202a;
-    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: clamp(2.35rem, 4.3vw, 4.1rem);
     line-height: 0.92;
     letter-spacing: -0.07em;
     font-weight: 300;
+    font-synthesis: none;
   }
 
   .unlock-heading-accent {
@@ -463,7 +475,7 @@
 
   @media (max-width: 1200px) {
     .unlock-layout {
-      width: min(1440px, calc(100vw - 3rem));
+      width: min(1440px, 100%);
       grid-template-columns: minmax(0, 1fr);
       gap: 2.5rem;
     }
@@ -494,11 +506,11 @@
     }
 
     .unlock-layout {
-      width: calc(100vw - 1.8rem);
+      width: 100%;
     }
 
     .unlock-heading {
-      font-size: clamp(2.7rem, 12vw, 4rem);
+      font-size: clamp(2.2rem, 10vw, 3.4rem);
     }
 
     .unlock-board {
