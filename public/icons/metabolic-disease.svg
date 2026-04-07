@@ -1,0 +1,122 @@
+<svg width="75" height="75" viewBox="0 0 380 378" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    path, line, circle {
+      transform-origin: center;
+    }
+    
+    .main-body {
+      animation: body-flow 25s infinite ease-in-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    
+    .cristae {
+      animation: cristae-flow 20s infinite ease-in-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    
+    .dash {
+      animation: dash-flow-intense 8s infinite ease-in-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    
+    .dash:nth-child(1) { animation-delay: -1s; }
+    .dash:nth-child(2) { animation-delay: -2s; }
+    .dash:nth-child(3) { animation-delay: -3s; }
+    .dash:nth-child(4) { animation-delay: -4s; }
+    .dash:nth-child(5) { animation-delay: -5s; }
+    .dash:nth-child(6) { animation-delay: -6s; }
+    .dash:nth-child(7) { animation-delay: -7s; }
+    .dash:nth-child(8) { animation-delay: -0.5s; }
+    .dash:nth-child(9) { animation-delay: -1.5s; }
+    .dash:nth-child(10) { animation-delay: -2.5s; }
+    
+    .blob {
+      animation: blob-flow-intense 15s infinite ease-in-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    
+    .blob:nth-child(1) { animation-delay: -5s; }
+    .blob:nth-child(2) { animation-delay: -10s; }
+    
+    .circle {
+      animation: circle-float 12s infinite ease-in-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    
+    .circle:nth-child(1) { animation-delay: -4s; }
+    .circle:nth-child(2) { animation-delay: -8s; }
+    .circle:nth-child(3) { animation-delay: -2s; }
+    
+    @keyframes body-flow {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      25% { transform: translate(0.8px, 1px) scale(1.003) rotate(0.2deg); }
+      50% { transform: translate(-0.4px, 0.8px) scale(0.997) rotate(-0.2deg); }
+      75% { transform: translate(-0.8px, -0.4px) scale(0.999) rotate(-0.1deg); }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    }
+    
+    @keyframes cristae-flow {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      20% { transform: translate(1.5px, 0.8px) scale(1.005) rotate(0.3deg); }
+      40% { transform: translate(0.8px, -1px) scale(0.995) rotate(0.2deg); }
+      60% { transform: translate(-1px, -0.8px) scale(0.997) rotate(-0.2deg); }
+      80% { transform: translate(-0.8px, 1px) scale(1.003) rotate(-0.3deg); }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    }
+    
+    @keyframes dash-flow-intense {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      20% { transform: translate(3px, 2px) scale(1.05) rotate(2deg); }
+      40% { transform: translate(1.5px, -3px) scale(0.95) rotate(4deg); }
+      60% { transform: translate(-2px, -2px) scale(0.97) rotate(-3deg); }
+      80% { transform: translate(-2px, 3px) scale(1.03) rotate(-5deg); }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    }
+    
+    @keyframes blob-flow-intense {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      15% { transform: translate(3px, 2px) scale(1.04, 0.96) rotate(1deg); }
+      30% { transform: translate(3.5px, -1.5px) scale(1.03, 0.97) rotate(2deg); }
+      45% { transform: translate(0.8px, -3px) scale(0.97, 1.03) rotate(1deg); }
+      60% { transform: translate(-3px, -2px) scale(0.96, 1.04) rotate(-1deg); }
+      75% { transform: translate(-3.5px, 1.5px) scale(0.97, 1.03) rotate(-2deg); }
+      90% { transform: translate(-1.5px, 3px) scale(1.03, 0.97) rotate(-1deg); }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    }
+    
+    @keyframes circle-float {
+      0% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(2px, 1.5px) scale(1.07); }
+      50% { transform: translate(0px, 3px) scale(0.97); }
+      75% { transform: translate(-2px, 0.8px) scale(1.03); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+  </style>
+  
+  <path class="dash" d="M197 133.5C197 133.5 202.934 140.527 204.5 146C206.165 151.82 204.5 161.5 204.5 161.5" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M130 185.5C141.5 201 146.151 194.947 156.5 201" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M233.5 196C233.5 196 226.168 180.796 232 175C237.685 169.35 252.5 176 252.5 176" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M237 135.5C237 135.5 242.228 127.398 246.5 123C251.643 117.705 261.5 111.5 261.5 111.5" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M72 202V227" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M125.52 246.213L150.48 244.786" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M306.867 155.227L308.092 180.197" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M211.28 55.3613L225.946 75.6075" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M182.394 235.434L199.606 253.566" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  <path class="dash" d="M80.5 284.5C87.007 303.722 105 301.5 109 284.5M159.5 299.5C159.5 299.5 173.5 306.129 173.5 314C173.5 321.871 159.5 328.5 159.5 328.5" stroke="#1A141E" stroke-width="6" stroke-linecap="round"/>
+  
+  <path class="main-body" d="M350 177L179.5 346.5L160.5 356C160.5 356 138.986 362.592 124.5 363C113.265 363.317 106.901 363.735 96.0001 361L79.5 356C79.5 356 66.9494 351.344 60 346.5C48.4636 338.46 45.9469 335.523 36.9156 324.985L36.5001 324.5C27.1275 313.566 22.4239 299.003 18.5001 284.5C13.8593 267.348 14.1681 256.233 18.5001 239C22.3321 223.756 36.5001 203 36.5001 203L200.5 37.0005C200.5 37.0005 217.163 26.2506 229 22.0005C251.848 13.797 267.507 11.384 291 17.5005C312.553 23.1118 324.402 31.1284 339.5 47.5005C357.094 66.5792 364.302 82.1881 367 108C369.885 135.602 350 177 350 177Z" stroke="#1A141E" stroke-width="7"/>
+  
+  <path class="cristae" d="M127.5 311.5C121.198 318.505 116.193 324.362 107.5 328C100.816 330.797 96.7359 329.879 89.5 329.5C80.5112 329.029 75.4078 325.771 68.5 320C63.4918 315.816 60.9136 312.839 58 307C54.4439 299.873 54.0731 294.965 54 287C53.9234 278.652 53.3238 272.916 58 266C62.1576 259.851 67.4154 259.251 73.5 255C79.7159 250.657 83.8066 249.008 89.5 244C95.7341 238.516 99.8821 235.473 103.5 228C106.721 221.347 109.171 216.7 107.5 209.5C106.19 203.854 101.521 202.432 99.5 197C97.3041 191.098 96.4376 187.207 97.5 181C98.7996 173.408 101.163 168.378 107.5 164C112.799 160.338 117.125 160.916 123.5 160C132.391 158.722 137.518 160 146.5 160C151.967 160 156.184 163.356 160.5 160C164.399 156.967 164.08 152.922 164.5 148C165.305 138.57 152.853 134.586 155.5 125.5C157.095 120.025 162.5 111 162.5 111C162.5 111 167.849 105.566 172.5 103C177.8 100.075 192 99.9998 192 99.9998L216.5 106C216.5 106 231.143 102.986 238 96.9998C245.115 90.7875 244.686 83.809 250 75.9998C254.461 69.4443 255.774 64.1994 262.5 59.9998C267.846 56.6614 278 53.4998 278 53.4998C285.143 52.4132 289.416 54.0803 296.5 55.4998C304.47 57.0969 309 59.1188 315.5 63.9998C322.718 69.4199 327.142 74.4377 330 82.9998C332.597 90.7789 331.884 96.42 330 104C327.478 114.144 322.896 118.582 315.5 125.5C307.647 132.846 299.519 130.835 291.5 138C285.178 143.648 280.543 147.589 278 156C275.852 163.102 276.897 167.662 278 175C279.157 182.694 284.493 186.234 284 194C283.588 200.478 281.7 204.167 278 209.5C273.567 215.889 269.819 219.374 262.5 222C254.965 224.703 249.895 223.329 242 222C235.544 220.913 232.205 214.913 226 217C220.62 218.809 218.289 222.613 216.5 228C213.437 237.223 225.856 241.283 226 251C226.149 261.079 224.242 268.544 216.5 275C209.949 280.462 203.997 280.258 195.5 281C183.216 282.073 176.693 273.162 164.5 275C153.791 276.614 147.166 279.351 139.5 287C131.958 294.525 134.625 303.579 127.5 311.5Z" stroke="#1A141E" stroke-width="7"/>
+  
+  <path class="blob" d="M370 309.499C362.486 298.026 352.447 295.692 339 292.999C329.81 291.158 323.712 289.544 315 292.999C306.269 296.462 302.591 301.606 297.5 309.499C291.742 318.426 288.708 324.905 289.5 335.499C290.514 349.059 296.824 357.252 308 364.999C318.236 372.095 326.696 374.434 339 372.499C353.891 370.157 363.103 362.903 370 349.499C377.147 335.609 378.559 322.567 370 309.499Z" stroke="#1A141E" stroke-width="7"/>
+  <path class="blob" d="M45.7969 4.47082C32.1164 5.4328 25.1813 13.0569 16.2698 23.4813C10.1795 30.6055 5.79521 35.1403 4.56084 44.4312C3.32379 53.7423 6.02001 59.4618 10.4262 67.7571C15.4095 77.1392 19.5849 82.9483 29.219 87.4252C41.5509 93.1558 51.7805 91.6442 63.9956 85.6685C75.184 80.195 81.3525 73.9517 85.6665 62.2672C90.8876 48.1258 89.0495 36.5456 80.7135 23.9857C72.0753 10.9705 61.3794 3.3751 45.7969 4.47082Z" stroke="#1A141E" stroke-width="7"/>
+  
+  <circle class="circle" cx="332.5" cy="331.5" r="11.5" fill="#1A141E"/>
+  <circle class="circle" cx="46.7077" cy="47.9392" r="11.5" transform="rotate(-60.7991 46.7077 47.9392)" fill="#1A141E"/>
+  <circle class="circle" cx="291.5" cy="90.5" r="10.5" fill="#1A141E"/>
+</svg>

@@ -1,0 +1,128 @@
+<svg width="75" height="75" viewBox="0 0 527 441" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    path, line {
+      transform-origin: center;
+    }
+    
+    .cell-body {
+      animation: cell-flow 20s infinite ease-in-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    
+    .dash {
+      animation: dash-flow-intense 10s infinite ease-in-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    
+    .dash:nth-child(1) { animation-delay: -1s; }
+    .dash:nth-child(2) { animation-delay: -2s; }
+    .dash:nth-child(3) { animation-delay: -3s; }
+    .dash:nth-child(4) { animation-delay: -4s; }
+    .dash:nth-child(5) { animation-delay: -5s; }
+    .dash:nth-child(6) { animation-delay: -6s; }
+    .dash:nth-child(7) { animation-delay: -7s; }
+    .dash:nth-child(8) { animation-delay: -8s; }
+    .dash:nth-child(9) { animation-delay: -9s; }
+    .dash:nth-child(10) { animation-delay: -10s; }
+    
+    .outer-line {
+      animation: outer-line-flow 25s infinite ease-in-out;
+      transform-box: fill-box;
+    }
+    
+    .outer-line:nth-child(1) { animation-delay: -8s; transform-origin: 85px 162px; }
+    .outer-line:nth-child(2) { animation-delay: -16s; transform-origin: 120px 101px; }
+    .outer-line:nth-child(3) { animation-delay: -4s; transform-origin: 438px 124px; }
+    
+    .blob {
+      animation: blob-flow-intense 15s infinite ease-in-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    
+    .blob:nth-child(1) { animation-delay: -3s; }
+    .blob:nth-child(2) { animation-delay: -6s; }
+    .blob:nth-child(3) { animation-delay: -9s; }
+    .blob:nth-child(4) { animation-delay: -12s; }
+    
+    .connected-line {
+      animation: connected-line-flow 18s infinite ease-in-out;
+      transform-box: fill-box;
+    }
+    
+    .connected-line:nth-child(1) { animation-delay: -6s; transform-origin: 195px 285px; }
+    .connected-line:nth-child(2) { animation-delay: -12s; transform-origin: 263px 197px; }
+    .connected-line:nth-child(3) { animation-delay: -18s; transform-origin: 272px 108px; }
+    
+    @keyframes cell-flow {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      25% { transform: translate(1px, 1.5px) scale(1.005) rotate(0.3deg); }
+      50% { transform: translate(-0.5px, 1px) scale(0.995) rotate(-0.3deg); }
+      75% { transform: translate(-1px, -0.5px) scale(0.998) rotate(-0.2deg); }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    }
+    
+    @keyframes dash-flow-intense {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      20% { transform: translate(3px, 2px) scale(1.1) rotate(2deg); }
+      40% { transform: translate(2px, -3px) scale(0.95) rotate(4deg); }
+      60% { transform: translate(-3px, -2px) scale(0.9) rotate(-3deg); }
+      80% { transform: translate(-2px, 3px) scale(1.05) rotate(-5deg); }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    }
+    
+    @keyframes outer-line-flow {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      33% { transform: translate(2px, 1.5px) rotate(0.8deg) scale(1.01); }
+      66% { transform: translate(-1.5px, 1px) rotate(-0.8deg) scale(0.99); }
+      100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    }
+    
+    @keyframes blob-flow-intense {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      15% { transform: translate(4px, 3px) scale(1.06, 0.94) rotate(1.5deg); }
+      30% { transform: translate(5px, -2px) scale(1.04, 0.96) rotate(3deg); }
+      45% { transform: translate(1px, -4px) scale(0.96, 1.04) rotate(1.5deg); }
+      60% { transform: translate(-4px, -3px) scale(0.94, 1.06) rotate(-1.5deg); }
+      75% { transform: translate(-5px, 2px) scale(0.96, 1.04) rotate(-3deg); }
+      90% { transform: translate(-2px, 4px) scale(1.04, 0.96) rotate(-1.5deg); }
+      100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    }
+    
+    @keyframes connected-line-flow {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      25% { transform: translate(2px, 1px) rotate(1deg) scale(1.02); }
+      50% { transform: translate(0px, 2px) rotate(-1deg) scale(0.98); }
+      75% { transform: translate(-2px, 0px) rotate(-2deg) scale(1.01); }
+      100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    }
+  </style>
+  
+  <path class="dash" d="M152.5 285L162.5 307" stroke="#1A141E" stroke-width="10" stroke-linecap="round"/>
+  <path class="dash" d="M378 224L388 246" stroke="#1A141E" stroke-width="10" stroke-linecap="round"/>
+  <path class="dash" d="M356 292L366 314" stroke="#1A141E" stroke-width="10" stroke-linecap="round"/>
+  <path class="dash" d="M230 101L240 123" stroke="#1A141E" stroke-width="10" stroke-linecap="round"/>
+  <path class="dash" d="M220 151L230 173" stroke="#1A141E" stroke-width="10" stroke-linecap="round"/>
+  <path class="dash" d="M153 159L163 181" stroke="#1A141E" stroke-width="10" stroke-linecap="round"/>
+  <path class="dash" d="M251 339L261 361" stroke="#1A141E" stroke-width="10" stroke-linecap="round"/>
+  
+  <path class="cell-body" d="M265.819 374.839C246.254 374.757 235.616 391.071 216.867 385.487C197.101 379.6 198.206 358.13 181.002 346.768C164.815 336.077 146.996 344.148 134.473 329.344C119.41 311.537 137.752 291.839 130.111 269.813C123.374 250.389 102.101 245.842 102 225.286C101.899 204.57 123.648 199.96 130.111 180.275C136.326 161.347 122.705 145.538 134.473 129.455C146.981 112.362 168.425 123.311 185.364 110.58C201.666 98.3269 197.505 75.3828 216.867 68.9565C235.645 62.7242 246.035 81.6188 265.819 82.0243C287.253 82.4636 298.712 62.4407 319.133 68.9565C339.588 75.4833 337.456 98.211 354.998 110.58C370.591 121.574 388.261 114.482 400.073 129.455C412.48 145.183 400.271 161.364 406.858 180.275C413.608 199.654 434.098 204.767 434 225.286C433.902 245.643 413.759 250.658 406.858 269.813C398.926 291.83 415.566 311.791 400.073 329.344C387.592 343.484 371.121 336.966 354.998 346.768C336.127 358.241 335.308 380.434 313.801 385.487C295.116 389.877 285.014 374.919 265.819 374.839Z" stroke="#1A141E" stroke-width="9"/>
+  
+  <path class="outer-line" d="M85.2646 162.437C21.6983 390.131 264.227 476.615 374.735 396.971" stroke="#1A141E" stroke-width="9" stroke-linecap="round"/>
+  <path class="outer-line" d="M120.47 101.36C183.058 33.4418 265.205 11.4545 357.132 49.5667" stroke="#1A141E" stroke-width="9" stroke-linecap="round"/>
+  <path class="outer-line" d="M438.301 124.324C462.26 152.664 489.643 233.774 449.058 317.816" stroke="#1A141E" stroke-width="9" stroke-linecap="round"/>
+  
+  <path class="blob" d="M102 389C89.5549 378.102 73.296 373.658 60 383.5C48.53 391.99 43.2487 405.672 49.5 418.5C55.4754 430.762 67.8614 432.274 81.5 432.5C95.6771 432.734 110.547 431.961 115 418.5C118.954 406.547 111.471 397.293 102 389Z" stroke="#1A141E" stroke-width="9"/>
+  <path class="blob" d="M522.5 381C521.511 364.159 512.417 352.092 496.5 346.5C496.5 346.5 471.714 337.572 455.5 339C438.379 340.508 414.5 355 414.5 355C400.471 367.582 401.141 384.293 406 402.5C409.464 415.48 413.09 424.411 424.5 431.5C438.432 440.157 450.406 434.663 466.5 431.5C481.977 428.459 492.321 427.102 504 416.5C515.575 405.993 523.417 396.607 522.5 381Z" stroke="#1A141E" stroke-width="9"/>
+  <path class="blob" d="M460.5 98.9996C440.4 107.34 422.972 106.271 405 93.9996C392.159 85.2314 385.127 76.7308 382 61.4996C379.671 50.1563 380.15 42.5151 385 31.9996C392.065 16.6796 403.072 9.83707 419.5 5.99963C433.887 2.63905 443.919 4.1314 457 10.9996C471.609 18.6704 478.693 27.876 484 43.4996C488.773 57.5509 491.504 68.6969 484 81.4996C478.214 91.3712 471.069 94.6143 460.5 98.9996Z" stroke="#1A141E" stroke-width="9"/>
+  <path class="blob" d="M97.558 84.8396C92.9385 76.5988 87.682 72.8139 78.8454 69.6422C78.8454 69.6422 63.2716 63.7092 52.8105 63.0703C41.9335 62.406 31.9435 62.2801 25.1485 66.767C18.3534 71.2539 18.8019 77.8422 14.5718 84.8396C11.4484 90.0062 8.44786 92.2814 6.43589 97.9833C3.29019 106.898 3.5576 113.21 6.43589 122.217C9.56799 132.018 14.8847 136.095 22.3009 143.165C28.6792 149.245 32.2399 153.647 40.6067 156.309C55.3847 161.009 65.2592 153.15 78.8454 145.629C86.8138 141.219 92.607 139.358 97.558 131.664C103.421 122.552 102.287 114.99 101.626 104.144C101.157 96.4512 101.318 91.5474 97.558 84.8396Z" stroke="#1A141E" stroke-width="9"/>
+  <path class="blob" d="M207 204.5C195.211 204.058 187.261 204.375 177.5 211C168.84 216.877 162.042 222.048 161.5 232.5C160.917 243.749 168.542 249.67 177.5 256.5C187.078 263.803 195.082 267.246 207 265.5C218.362 263.835 223.906 258.008 231.777 249.735L232 249.5C237.525 243.693 242.671 240.472 243.5 232.5C244.485 223.029 239.406 216.984 232 211C224.154 204.66 217.081 204.878 207 204.5Z" stroke="#1A141E" stroke-width="9"/>
+  <path class="blob" d="M316.355 280.133C309.509 272.603 304.512 267.897 294.536 265.883C285.685 264.096 278.394 263.03 271.627 269.008C264.344 275.443 265.3 283.716 266.502 293.36C267.786 303.671 270.499 310.682 278.771 316.971C286.658 322.966 293.597 322.863 303.447 322.716L303.727 322.712C310.641 322.609 315.733 323.835 321.146 319.531C327.576 314.419 328.233 307.639 327.448 299.462C326.616 290.799 322.21 286.573 316.355 280.133Z" stroke="#1A141E" stroke-width="9"/>
+  <path class="blob" d="M306.811 163.003C299.899 170.768 295.656 176.351 294.684 186.701C293.822 195.884 293.524 203.405 300.325 209.635C307.645 216.34 315.946 214.478 325.612 212.22C335.948 209.805 342.778 206.295 348.275 197.215C353.516 188.559 352.664 181.522 351.455 171.532L351.421 171.248C350.572 164.236 351.269 158.932 346.315 153.897C340.43 147.916 333.473 147.978 325.251 149.656C316.541 151.433 312.722 156.363 306.811 163.003Z" stroke="#1A141E" stroke-width="9"/>
+  
+  <path class="connected-line" d="M195.5 285.5C211.303 291.991 217.583 299.271 226.5 315.5" stroke="#1A141E" stroke-width="9"/>
+  <path class="connected-line" d="M263.5 197C283 212 280.565 222.293 291.5 238.5" stroke="#1A141E" stroke-width="9"/>
+  <path class="connected-line" d="M272 108.5C286.306 112.41 291.658 119.166 294 143.5" stroke="#1A141E" stroke-width="9"/>
+</svg>

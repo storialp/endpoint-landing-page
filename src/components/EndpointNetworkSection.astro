@@ -1,0 +1,305 @@
+<section class="network-section" aria-labelledby="endpoint-network-heading">
+  <div class="network-shell">
+    <h2 id="endpoint-network-heading" class="sr-only">
+      Endpoint data network and therapeutic areas
+    </h2>
+
+    <article class="network-panel network-stats">
+      <p class="network-pill">
+        <span class="pill-dot" aria-hidden="true"></span>
+        THE ENDPOINT DATA NETWORK
+      </p>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <p class="metric-label">Unique patients in network</p>
+          <p class="metric-value">25M</p>
+        </div>
+
+        <div class="metric-card metric-card-secondary">
+          <p class="metric-label">Countries</p>
+          <p class="metric-value">8</p>
+        </div>
+      </div>
+    </article>
+
+    <aside class="network-panel therapy-panel" aria-label="Therapeutic areas covered">
+      <p class="network-pill therapy-pill">
+        <span class="pill-dot" aria-hidden="true"></span>
+        THERAPEUTIC AREAS
+      </p>
+
+      <ul class="therapy-list" role="list">
+        <li class="therapy-item">
+          <img class="therapy-icon" src="/icons/cancer.svg" alt="" aria-hidden="true" loading="lazy" />
+          <p class="therapy-name">Cancer</p>
+        </li>
+        <li class="therapy-item">
+          <img class="therapy-icon" src="/icons/virology.svg" alt="" aria-hidden="true" loading="lazy" />
+          <p class="therapy-name">Virology</p>
+        </li>
+        <li class="therapy-item therapy-item-metabolic">
+          <img
+            class="therapy-icon"
+            src="/icons/metabolic-disease.svg"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+          />
+          <p class="therapy-name">Metabolic disease</p>
+        </li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .network-section {
+    padding: clamp(3rem, 8vw, 6.5rem) 12px clamp(4rem, 9vw, 7rem);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(176, 145, 255, 0.08), transparent 30%),
+      var(--bg);
+  }
+
+  .network-shell {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(290px, 0.72fr);
+    gap: clamp(12px, 1.8vw, 18px);
+    align-items: stretch;
+  }
+
+  .network-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+  }
+
+  .network-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    opacity: 0.18;
+    mix-blend-mode: soft-light;
+  }
+
+  .network-stats {
+    min-height: clamp(31rem, 52vw, 41rem);
+    padding: clamp(1.8rem, 3vw, 2.45rem);
+    background:
+      radial-gradient(circle at top center, rgba(176, 145, 255, 0.1), transparent 38%),
+      radial-gradient(circle at 80% 80%, rgba(176, 145, 255, 0.06), transparent 22%),
+      #1c1621;
+    box-shadow:
+      0 30px 70px rgba(20, 11, 26, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .therapy-panel {
+    min-height: clamp(31rem, 52vw, 41rem);
+    padding: clamp(1.8rem, 3vw, 2.2rem);
+    background:
+      radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 28%),
+      linear-gradient(180deg, #9d82f2 0%, #9c80ee 100%);
+    box-shadow:
+      0 30px 70px rgba(109, 82, 181, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+
+  .network-pill {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 0;
+    padding: 0.72rem 1.05rem;
+    border-radius: 0.82rem;
+    background: rgba(67, 49, 73, 0.96);
+    color: #f6eef9;
+    font-size: clamp(0.8rem, 0.95vw, 0.95rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  .therapy-pill {
+    background: rgba(51, 30, 53, 0.92);
+    color: #f3ebff;
+  }
+
+  .pill-dot {
+    width: 0.66rem;
+    height: 0.66rem;
+    border-radius: 999px;
+    background: #b091ff;
+    box-shadow: 0 0 0 0.24rem rgba(176, 145, 255, 0.24);
+    flex: 0 0 auto;
+  }
+
+  .metric-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.32fr) minmax(240px, 0.68fr);
+    gap: 0;
+    height: calc(100% - 5.25rem);
+    margin-top: clamp(2.75rem, 7vw, 5rem);
+  }
+
+  .metric-card {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0 clamp(1.2rem, 2vw, 2rem) 1.1rem clamp(1.8rem, 2.6vw, 2.55rem);
+    border-left: 3px solid rgba(176, 145, 255, 0.85);
+  }
+
+  .metric-card-secondary {
+    padding-right: clamp(0.5rem, 1.6vw, 1.1rem);
+  }
+
+  .metric-label {
+    margin: 0;
+    color: #ad92ff;
+    font-family: "IBM Plex Mono", "IBM Plex Sans", monospace;
+    font-size: clamp(1.35rem, 2.6vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.045em;
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+
+  .metric-value {
+    margin: 0;
+    color: #ad92ff;
+    font-size: clamp(5rem, 10vw, 8rem);
+    line-height: 0.84;
+    letter-spacing: -0.08em;
+    font-weight: 500;
+  }
+
+  .therapy-list {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: calc(100% - 4.75rem);
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.6rem;
+  }
+
+  .therapy-item {
+    display: grid;
+    justify-items: center;
+    gap: 0.95rem;
+    text-align: center;
+    transition: transform 220ms ease;
+  }
+
+  .therapy-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .therapy-icon {
+    display: block;
+    width: clamp(4.8rem, 6.2vw, 5.4rem);
+    height: auto;
+  }
+
+  .therapy-name {
+    margin: 0;
+    color: #1c1621;
+    font-family: "IBM Plex Mono", "IBM Plex Sans", monospace;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .therapy-item-metabolic .therapy-name {
+    max-width: 11ch;
+  }
+
+  @media (max-width: 960px) {
+    .network-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .network-stats,
+    .therapy-panel {
+      min-height: 0;
+    }
+
+    .metric-grid {
+      min-height: 22rem;
+    }
+
+    .therapy-list {
+      height: auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem 1rem;
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .network-panel {
+      border-radius: 1.6rem;
+    }
+
+    .metric-grid {
+      grid-template-columns: 1fr;
+      height: auto;
+      gap: 2rem;
+    }
+
+    .metric-card {
+      min-height: 14rem;
+      padding-bottom: 0;
+    }
+
+    .metric-card-secondary {
+      padding-right: clamp(1.2rem, 2vw, 2rem);
+    }
+
+    .therapy-list {
+      grid-template-columns: 1fr;
+      gap: 2.2rem;
+    }
+
+    .therapy-item {
+      gap: 0.75rem;
+    }
+
+    .therapy-name {
+      max-width: none;
+    }
+  }
+</style>

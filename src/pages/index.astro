@@ -1,7 +1,9 @@
 ---
 import DnaHelix from "../components/DnaHelix.astro";
+import EndpointNetworkSection from "../components/EndpointNetworkSection.astro";
 import ScrollKaplanSection from "../components/ScrollKaplanSection.astro";
 import EndpointResearchBar from "../components/EndpointResearchBar.astro";
+import UnlockPotentialSection from "../components/UnlockPotentialSection.astro";
 import WavyFlowSphere from "../components/WavyFlowSphere.astro";
 ---
 
@@ -13,7 +15,7 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width" />
@@ -101,6 +103,17 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
           </div>
         </div>
       </section>
+
+      <EndpointNetworkSection />
+
+      <UnlockPotentialSection />
+
+      <footer class="site-footer">
+        <p>
+          &copy; Endpoint Data Inc 2025 8 The Green, Ste R Dover, Kent 19901, Delaware, United
+          States
+        </p>
+      </footer>
     </main>
   </body>
 </html>
@@ -138,6 +151,23 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
 
   .page-shell {
     padding: 2.5rem 4rem 0;
+  }
+
+  .site-footer {
+    margin: 0 calc(50% - 50vw);
+    margin-top: 0;
+    padding: 2rem 4.8rem 2.15rem;
+    background: #1b151f;
+    color: rgba(244, 239, 231, 0.86);
+  }
+
+  .site-footer p {
+    margin: 0;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 1.02rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
   }
 
   .hero {
@@ -470,6 +500,15 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
   @media (max-width: 780px) {
     .page-shell {
       padding: 1rem 0.9rem 0;
+    }
+
+    .site-footer {
+      padding: 1.4rem 1.35rem 1.55rem;
+    }
+
+    .site-footer p {
+      font-size: 0.8rem;
+      line-height: 1.6;
     }
 
     .topbar {
