@@ -1,0 +1,562 @@
+<section class="kaplan-section" aria-label="Evidence visualization">
+  <div class="kaplan-track" data-kaplan-track>
+    <div class="kaplan-sticky" data-kaplan-stage>
+      <div class="kaplan-copy">
+        <p class="kaplan-line kaplan-line-primary" data-copy-primary>
+          We're creating a future where every medical decision is backed by reliable science.
+        </p>
+        <p class="kaplan-line kaplan-line-secondary" data-copy-secondary>
+          With evidence that is instant, personalized, and accessible.
+        </p>
+      </div>
+
+      <div class="kaplan-visual" data-visual>
+        <div class="kaplan-square-mask" data-square-mask></div>
+
+        <div class="kaplan-chart-shell" data-chart-shell aria-hidden="true">
+          <canvas data-kaplan-canvas></canvas>
+        </div>
+
+        <svg
+          class="kaplan-square"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="xMidYMid meet"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="kaplan-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f5704d"></stop>
+              <stop offset="50%" stop-color="#ffcf66"></stop>
+              <stop offset="100%" stop-color="#f4efe4"></stop>
+            </linearGradient>
+          </defs>
+          <rect
+            data-kaplan-rect
+            x="10"
+            y="10"
+            width="80"
+            height="80"
+            fill="none"
+            stroke="url(#kaplan-gradient)"
+            stroke-width="1.2"
+            pathLength="1"
+            stroke-linecap="square"
+          ></rect>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .kaplan-section {
+    position: relative;
+    margin-top: 4rem;
+  }
+
+  .kaplan-track {
+    position: relative;
+    height: 320vh;
+  }
+
+  .kaplan-sticky {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 6vw, 8rem);
+    min-height: 100vh;
+    padding: 2rem 5vw;
+    overflow: clip;
+  }
+
+  .kaplan-sticky::before {
+    content: "";
+    position: absolute;
+    inset: 10% 5%;
+    height: 80%;
+    border-radius: 3rem;
+    background:
+      radial-gradient(circle at 20% 18%, rgba(244, 224, 191, 0.4), transparent 40%),
+      radial-gradient(circle at 80% 32%, rgba(240, 133, 81, 0.12), transparent 35%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .kaplan-copy,
+  .kaplan-visual {
+    position: relative;
+    z-index: 1;
+  }
+
+  .kaplan-copy {
+    flex: 1;
+    display: grid;
+    align-items: center;
+    max-width: 42rem;
+  }
+
+  .kaplan-line {
+    grid-area: 1 / 1;
+    margin: 0;
+    color: rgba(31, 25, 37, 0.24);
+    font-size: clamp(2.4rem, 4.2vw, 4.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+    font-weight: 300;
+    text-wrap: balance;
+    visibility: hidden;
+    transition:
+      color 220ms ease,
+      opacity 220ms ease,
+      transform 220ms ease,
+      visibility 0ms linear 220ms;
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  .kaplan-line + .kaplan-line {
+    max-width: 22ch;
+  }
+
+  .kaplan-line.is-active {
+    visibility: visible;
+    color: var(--ink);
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0ms;
+  }
+
+  .kaplan-line.is-muted {
+    visibility: hidden;
+    color: rgba(31, 25, 37, 0.16);
+    opacity: 0;
+  }
+
+  .kaplan-line.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(0);
+    pointer-events: none;
+  }
+
+  .kaplan-visual {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 40vw;
+    height: 40vw;
+    max-width: 36rem;
+    max-height: 36rem;
+  }
+
+  .kaplan-visual > * {
+    grid-area: 1 / 1;
+  }
+
+  .kaplan-square {
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+  }
+
+  .kaplan-chart-shell,
+  .kaplan-square-mask {
+    position: absolute;
+    inset: 10%;
+    width: 80%;
+    height: 80%;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .kaplan-square-mask {
+    background: #12141d;
+    opacity: 0;
+    z-index: 1;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+  }
+
+  .kaplan-chart-shell {
+    opacity: 0;
+    z-index: 2;
+    background: #12141d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 30px 90px rgba(0, 0, 0, 0.35),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .kaplan-chart-shell canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 1000px) {
+    .kaplan-sticky {
+      flex-direction: column;
+      gap: 3rem;
+      padding: 4rem 1.5rem;
+    }
+
+    .kaplan-copy {
+      max-width: 34rem;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .kaplan-visual {
+      width: min(70vw, 30rem);
+      height: min(70vw, 30rem);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .kaplan-sticky {
+      gap: 2rem;
+    }
+
+    .kaplan-line {
+      font-size: clamp(2rem, 8vw, 3.2rem);
+    }
+
+    .kaplan-visual {
+      width: min(85vw, 24rem);
+      height: min(85vw, 24rem);
+    }
+  }
+</style>
+
+<script>
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const lerp = (start, end, amount) => start + (end - start) * amount;
+  const mapRange = (value, inMin, inMax, outMin, outMax) => {
+    if (inMax === inMin) return outMin;
+    const t = clamp((value - inMin) / (inMax - inMin), 0, 1);
+    return lerp(outMin, outMax, t);
+  };
+
+  const section = document.querySelector("[data-kaplan-track]");
+  if (section) {
+    const stage = section.querySelector("[data-kaplan-stage]");
+    const visual = section.querySelector("[data-visual]");
+    const rect = section.querySelector("[data-kaplan-rect]");
+    const mask = section.querySelector("[data-square-mask]");
+    const chartShell = section.querySelector("[data-chart-shell]");
+    const canvas = section.querySelector("[data-kaplan-canvas]");
+    const primaryCopy = section.querySelector("[data-copy-primary]");
+    const secondaryCopy = section.querySelector("[data-copy-secondary]");
+
+    const chartData = [
+      { time: 0, treatment: 1.0, control: 1.0 },
+      { time: 1, treatment: 0.985, control: 0.975 },
+      { time: 2, treatment: 0.97, control: 0.95 },
+      { time: 3, treatment: 0.95, control: 0.915 },
+      { time: 4, treatment: 0.93, control: 0.88 },
+      { time: 5, treatment: 0.91, control: 0.84 },
+      { time: 6, treatment: 0.89, control: 0.8 },
+      { time: 7, treatment: 0.865, control: 0.76 },
+      { time: 8, treatment: 0.84, control: 0.72 },
+      { time: 9, treatment: 0.815, control: 0.685 },
+      { time: 10, treatment: 0.79, control: 0.65 },
+      { time: 11, treatment: 0.765, control: 0.615 },
+      { time: 12, treatment: 0.74, control: 0.58 },
+      { time: 13, treatment: 0.715, control: 0.55 },
+      { time: 14, treatment: 0.69, control: 0.52 },
+      { time: 15, treatment: 0.665, control: 0.49 },
+      { time: 16, treatment: 0.64, control: 0.46 },
+      { time: 17, treatment: 0.615, control: 0.435 },
+      { time: 18, treatment: 0.59, control: 0.41 },
+      { time: 19, treatment: 0.57, control: 0.385 },
+      { time: 20, treatment: 0.55, control: 0.36 },
+      { time: 21, treatment: 0.53, control: 0.34 },
+      { time: 22, treatment: 0.51, control: 0.32 },
+      { time: 23, treatment: 0.49, control: 0.3 },
+      { time: 24, treatment: 0.47, control: 0.28 },
+      { time: 25, treatment: 0.45, control: 0.265 },
+      { time: 26, treatment: 0.43, control: 0.25 },
+      { time: 27, treatment: 0.415, control: 0.235 },
+      { time: 28, treatment: 0.4, control: 0.22 },
+      { time: 29, treatment: 0.385, control: 0.205 },
+      { time: 30, treatment: 0.37, control: 0.19 },
+      { time: 31, treatment: 0.355, control: 0.18 },
+      { time: 32, treatment: 0.34, control: 0.17 },
+      { time: 33, treatment: 0.33, control: 0.16 },
+      { time: 34, treatment: 0.32, control: 0.15 },
+      { time: 35, treatment: 0.31, control: 0.14 },
+      { time: 36, treatment: 0.3, control: 0.13 },
+    ];
+
+    let targetProgress = 0;
+    let smoothProgress = 0;
+    let rafId = 0;
+    let chartAnimationStart = 0;
+    let chartActive = false;
+
+    const getBaseSize = () => {
+      const viewportSize = Math.min(window.innerWidth, window.innerHeight);
+      const maxVisualSize = Math.min(window.innerWidth * 0.52, 544);
+      return Math.min(viewportSize * 0.65, maxVisualSize);
+    };
+
+    const updateScrollTarget = () => {
+      const rectBounds = section.getBoundingClientRect();
+      const scrollable = Math.max(section.offsetHeight - window.innerHeight, 1);
+      targetProgress = clamp(-rectBounds.top / scrollable, 0, 1);
+    };
+
+    const resizeCanvas = () => {
+      if (!canvas || !chartShell) return;
+      const dpr = window.devicePixelRatio || 1;
+      const width = chartShell.clientWidth;
+      const height = chartShell.clientHeight;
+      canvas.width = Math.max(1, Math.round(width * dpr));
+      canvas.height = Math.max(1, Math.round(height * dpr));
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+    };
+
+    const drawStepCurve = (
+      ctx,
+      data,
+      yKey,
+      color,
+      margin,
+      chartWidth,
+      chartHeight,
+      maxX,
+      minY,
+      lineWidth
+    ) => {
+      if (data.length < 2) return;
+      const points = data.map((point) => ({
+        x: margin.left + (point.time / maxX) * chartWidth,
+        y: margin.top + (chartHeight * (1 - point[yKey])) / (1 - minY),
+      }));
+
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lineWidth;
+      ctx.moveTo(points[0].x, points[0].y);
+
+      for (let i = 1; i < points.length; i += 1) {
+        ctx.lineTo(points[i].x, points[i - 1].y);
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 1;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    };
+
+    const drawChart = (progress) => {
+      if (!canvas || !chartShell) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const width = canvas.width / dpr;
+      const height = canvas.height / dpr;
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+
+      const minDimension = Math.min(width, height);
+      const axisFontSize = Math.max(9, Math.min(13, minDimension / 28));
+      const tickFontSize = Math.max(7, Math.min(11, minDimension / 34));
+      const legendFontSize = Math.max(8, Math.min(12, minDimension / 30));
+
+      const margin = {
+        top: Math.max(30, height * 0.15),
+        right: Math.max(30, width * 0.12),
+        bottom: Math.max(60, height * 0.18),
+        left: Math.max(60, width * 0.16),
+      };
+
+      const chartWidth = width - margin.left - margin.right;
+      const chartHeight = height - margin.top - margin.bottom;
+      const visiblePoints = Math.max(2, Math.ceil(chartData.length * progress));
+      const visibleData = chartData.slice(0, visiblePoints);
+      const currentMaxTime = visibleData[visibleData.length - 1].time || 1;
+
+      let currentMinSurvival = 1;
+      visibleData.forEach((point) => {
+        currentMinSurvival = Math.min(currentMinSurvival, point.treatment, point.control);
+      });
+      currentMinSurvival = Math.max(0, currentMinSurvival - 0.1);
+
+      // Grid lines and axes
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+      ctx.lineWidth = 1;
+
+      // X-axis
+      ctx.beginPath();
+      ctx.moveTo(margin.left, height - margin.bottom);
+      ctx.lineTo(width - margin.right, height - margin.bottom);
+      ctx.stroke();
+
+      // Y-axis
+      ctx.beginPath();
+      ctx.moveTo(margin.left, margin.top);
+      ctx.lineTo(margin.left, height - margin.bottom);
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+      const yStep = 0.2;
+      for (let i = 0; i <= 1 / yStep; i += 1) {
+        const survivalValue = 1 - i * yStep;
+        if (survivalValue < currentMinSurvival) break;
+        const yPos =
+          margin.top +
+          (chartHeight * (1 - survivalValue)) / Math.max(1 - currentMinSurvival, 0.001);
+
+        ctx.beginPath();
+        ctx.moveTo(margin.left, yPos);
+        ctx.lineTo(width - margin.right, yPos);
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+        ctx.font = `${tickFontSize}px "IBM Plex Sans", sans-serif`;
+        ctx.textAlign = "right";
+        ctx.fillText(`${Math.round(survivalValue * 100)}%`, margin.left - 8, yPos + 3);
+      }
+
+      for (let time = 0; time <= currentMaxTime; time += 12) {
+        const xPos = margin.left + (chartWidth * time) / Math.max(currentMaxTime, 1);
+        ctx.beginPath();
+        ctx.moveTo(xPos, margin.top);
+        ctx.lineTo(xPos, height - margin.bottom);
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+        ctx.font = `${tickFontSize}px "IBM Plex Sans", sans-serif`;
+        ctx.textAlign = "center";
+        ctx.fillText(`${time}`, xPos, height - margin.bottom + 16);
+      }
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+      ctx.font = `${axisFontSize}px "IBM Plex Sans", sans-serif`;
+      ctx.textAlign = "center";
+      ctx.fillText("Time (Months)", margin.left + chartWidth / 2, height - margin.bottom / 2 + 10);
+
+      ctx.save();
+      ctx.translate(margin.left / 2 - 10, margin.top + chartHeight / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText("Survival Probability", 0, 0);
+      ctx.restore();
+
+      drawStepCurve(
+        ctx,
+        visibleData,
+        "treatment",
+        "#f2a35e",
+        margin,
+        chartWidth,
+        chartHeight,
+        currentMaxTime,
+        currentMinSurvival,
+        2.5
+      );
+      drawStepCurve(
+        ctx,
+        visibleData,
+        "control",
+        "#a391ff",
+        margin,
+        chartWidth,
+        chartHeight,
+        currentMaxTime,
+        currentMinSurvival,
+        2.5
+      );
+
+      const legendX = width - margin.right - 100;
+      const legendY = margin.top + 10;
+
+      ctx.fillStyle = "#f2a35e";
+      ctx.fillRect(legendX, legendY, 12, 3);
+      ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+      ctx.font = `${legendFontSize}px "IBM Plex Sans", sans-serif`;
+      ctx.textAlign = "left";
+      ctx.fillText("Treatment", legendX + 18, legendY + 4);
+
+      ctx.fillStyle = "#a391ff";
+      ctx.fillRect(legendX, legendY + 20, 12, 3);
+      ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+      ctx.fillText("Control", legendX + 18, legendY + 24);
+    };
+
+    const updateChartState = (progress) => {
+      const shouldBeActive = progress >= 0.755;
+      if (shouldBeActive && !chartActive) {
+        chartActive = true;
+        chartAnimationStart = performance.now();
+      } else if (!shouldBeActive && chartActive) {
+        chartActive = false;
+        chartAnimationStart = 0;
+        drawChart(0);
+      }
+    };
+
+    const render = (time) => {
+      smoothProgress = lerp(smoothProgress, targetProgress, 0.11);
+
+      const drawProgress = mapRange(smoothProgress, 0, 0.7, 0, 1);
+      const strokeWidth = mapRange(smoothProgress, 0.74, 0.75, 1.2, 0.2);
+      const chartOpacity = mapRange(smoothProgress, 0.755, 0.76, 0, 1);
+      const maskOpacity = mapRange(smoothProgress, 0.74, 0.75, 0, 1);
+
+      rect.style.strokeDasharray = "1";
+      rect.style.strokeDashoffset = `${1 - drawProgress}`;
+      rect.style.strokeWidth = `${strokeWidth}`;
+      rect.style.stroke = smoothProgress >= 0.75 ? "#ffffff" : "url(#kaplan-gradient)";
+      mask.style.opacity = `${maskOpacity}`;
+      chartShell.style.opacity = `${chartOpacity}`;
+
+      primaryCopy.classList.toggle("is-active", smoothProgress < 0.74);
+      primaryCopy.classList.toggle("is-muted", smoothProgress >= 0.74);
+      primaryCopy.classList.toggle("is-hidden", smoothProgress >= 0.76);
+      secondaryCopy.classList.toggle("is-active", smoothProgress >= 0.74);
+      secondaryCopy.classList.toggle("is-muted", smoothProgress < 0.55);
+
+      updateChartState(smoothProgress);
+      if (chartActive) {
+        const elapsed = time - chartAnimationStart;
+        drawChart(clamp(elapsed / 3500, 0, 1));
+      }
+
+      rafId = window.requestAnimationFrame(render);
+    };
+
+    const onResize = () => {
+      updateScrollTarget();
+      resizeCanvas();
+      drawChart(chartActive ? 1 : 0);
+    };
+
+    updateScrollTarget();
+    resizeCanvas();
+    drawChart(0);
+    rafId = window.requestAnimationFrame(render);
+
+    window.addEventListener("scroll", updateScrollTarget, { passive: true });
+    window.addEventListener("resize", onResize);
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        window.cancelAnimationFrame(rafId);
+        window.removeEventListener("scroll", updateScrollTarget);
+        window.removeEventListener("resize", onResize);
+      },
+      { once: true }
+    );
+  }
+</script>
