@@ -1,0 +1,139 @@
+---
+const height = 420;
+const width = 260;
+const numRungs = 10;
+const lineColor = "#1a141e";
+const lineWidth = 2;
+const purple = "#9d7ff7";
+const shapeSize = 24;
+const duration = 6;
+const angleOffset = 8;
+const rungSpacing = height / (numRungs + 1);
+
+const rungs = Array.from({ length: numRungs }, (_, i) => {
+  const norm = i % 7;
+  const baseW = width * 0.48;
+  const wobble = baseW * 0.2;
+
+  let lShape = "none";
+  let rShape = "none";
+  let lCol = "#d9d9d9";
+  let rCol = "#daf972";
+
+  if (norm === 0) lShape = "circle";
+  else if (norm === 1) {
+    lShape = "hexagon";
+    lCol = "#e9d6aa";
+  } else if (norm === 5) {
+    lShape = "square";
+    lCol = purple;
+  }
+
+  if (norm === 3) {
+    rShape = "square";
+    rCol = "#a9cafb";
+  } else if (norm === 4) {
+    rShape = "circle";
+    rCol = purple;
+  } else if (norm === 6) {
+    rShape = "hexagon";
+    rCol = "#1a141e";
+  }
+
+  return {
+    y: (i + 1) * rungSpacing,
+    width: baseW - Math.sin((i * Math.PI) / 5) * wobble,
+    off: i * angleOffset,
+    delay: -(duration / numRungs) * i,
+    lShape,
+    rShape,
+    lCol,
+    rCol,
+  };
+});
+---
+
+<div class="helix-frame" aria-hidden="true">
+  <div class="helix-body">
+    {
+      rungs.map((rung) => (
+        <div
+          class="helix-rung"
+          style={`top:${rung.y}px;width:${rung.width}px;margin-left:${-rung.width / 2}px;--start:${rung.off}deg;animation-delay:${rung.delay}s;`}
+        >
+          {rung.lShape !== "none" && (
+            <span
+              class:list={["shape", "shape-left", rung.lShape]}
+              style={`background:${rung.lCol};top:${-(shapeSize / 2) + lineWidth / 2}px;left:${-shapeSize}px;`}
+            />
+          )}
+          {rung.rShape !== "none" && (
+            <span
+              class:list={["shape", "shape-right", rung.rShape]}
+              style={`background:${rung.rCol};top:${-(shapeSize / 2) + lineWidth / 2}px;right:${-shapeSize}px;`}
+            />
+          )}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style define:vars={{ height: `${height}px`, width: `${width}px`, lineColor, lineWidth: `${lineWidth}px`, shapeSize: `${shapeSize}px`, duration: `${duration}s` }}>
+  .helix-frame {
+    position: relative;
+    width: min(100%, 24rem);
+    aspect-ratio: 260 / 420;
+    margin: 0 auto;
+    perspective: 1000px;
+    overflow: visible;
+  }
+
+  .helix-body {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform: translateZ(-80px);
+  }
+
+  .helix-rung {
+    position: absolute;
+    left: 50%;
+    height: var(--lineWidth);
+    background: var(--lineColor);
+    transform-style: preserve-3d;
+    will-change: transform;
+    animation: spin var(--duration) linear infinite;
+  }
+
+  .shape {
+    position: absolute;
+    display: block;
+    width: var(--shapeSize);
+    height: var(--shapeSize);
+  }
+
+  .circle {
+    border-radius: 999px;
+  }
+
+  .hexagon {
+    clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
+  }
+
+  @keyframes spin {
+    from {
+      transform: translateZ(40px) rotateY(var(--start));
+    }
+
+    to {
+      transform: translateZ(40px) rotateY(calc(var(--start) + 360deg));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .helix-rung {
+      animation: none;
+    }
+  }
+</style>
