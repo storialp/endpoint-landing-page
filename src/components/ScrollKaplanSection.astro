@@ -51,7 +51,44 @@
 <style>
   .kaplan-section {
     position: relative;
-    margin-top: 4rem;
+    isolation: isolate;
+    width: calc(100% + (var(--shell-inline, 0px) * 2));
+    margin: 2rem 0 0 calc(var(--shell-inline, 0px) * -1);
+    padding: clamp(3.5rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3rem) clamp(5rem, 9vw, 7rem);
+    background:
+      radial-gradient(circle at 18% 18%, rgba(234, 142, 94, 0.22), transparent 24%),
+      radial-gradient(circle at 80% 22%, rgba(255, 213, 145, 0.14), transparent 26%),
+      radial-gradient(circle at 50% 110%, rgba(77, 53, 103, 0.28), transparent 34%),
+      linear-gradient(180deg, #1f1824 0%, #110d15 100%);
+    color: #f4efe6;
+    overflow: clip;
+  }
+
+  .kaplan-section::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 233, 203, 0.22) 18%,
+      rgba(255, 233, 203, 0.58) 50%,
+      rgba(255, 233, 203, 0.22) 82%,
+      transparent 100%
+    );
+    opacity: 0.95;
+  }
+
+  .kaplan-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(247, 244, 238, 0.22) 0%, rgba(247, 244, 238, 0) 10%),
+      linear-gradient(180deg, rgba(11, 8, 14, 0) 76%, rgba(11, 8, 14, 0.5) 100%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   .kaplan-track {
@@ -69,6 +106,7 @@
     min-height: 100vh;
     padding: 2rem 5vw;
     overflow: clip;
+    z-index: 1;
   }
 
   .kaplan-sticky::before {
@@ -78,10 +116,10 @@
     height: 80%;
     border-radius: 3rem;
     background:
-      radial-gradient(circle at 20% 18%, rgba(244, 224, 191, 0.4), transparent 40%),
-      radial-gradient(circle at 80% 32%, rgba(240, 133, 81, 0.12), transparent 35%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
-    filter: blur(40px);
+      radial-gradient(circle at 20% 18%, rgba(255, 212, 156, 0.22), transparent 42%),
+      radial-gradient(circle at 80% 32%, rgba(240, 133, 81, 0.14), transparent 35%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+    filter: blur(55px);
     pointer-events: none;
     z-index: 0;
   }
@@ -102,7 +140,7 @@
   .kaplan-line {
     grid-area: 1 / 1;
     margin: 0;
-    color: rgba(31, 25, 37, 0.24);
+    color: rgba(244, 239, 230, 0.26);
     font-size: clamp(2.4rem, 4.2vw, 4.8rem);
     line-height: 1.05;
     letter-spacing: -0.05em;
@@ -124,15 +162,16 @@
 
   .kaplan-line.is-active {
     visibility: visible;
-    color: var(--ink);
+    color: #fff7eb;
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0ms;
+    text-shadow: 0 12px 45px rgba(0, 0, 0, 0.28);
   }
 
   .kaplan-line.is-muted {
     visibility: hidden;
-    color: rgba(31, 25, 37, 0.16);
+    color: rgba(244, 239, 230, 0.15);
     opacity: 0;
   }
 
@@ -176,20 +215,27 @@
   }
 
   .kaplan-square-mask {
-    background: #12141d;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255, 214, 147, 0.08), transparent 30%),
+      #12141d;
     opacity: 0;
     z-index: 1;
-    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 30px 90px rgba(0, 0, 0, 0.42),
+      0 0 0 1px rgba(255, 226, 184, 0.08);
   }
 
   .kaplan-chart-shell {
     opacity: 0;
     z-index: 2;
-    background: #12141d;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255, 214, 147, 0.08), transparent 30%),
+      #12141d;
+    border: 1px solid rgba(255, 239, 215, 0.14);
     box-shadow: 
-      0 30px 90px rgba(0, 0, 0, 0.35),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      0 30px 90px rgba(0, 0, 0, 0.45),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+      0 0 40px rgba(245, 113, 77, 0.08);
   }
 
   .kaplan-chart-shell canvas {
@@ -306,14 +352,35 @@
     let targetProgress = 0;
     let smoothProgress = 0;
     let rafId = 0;
-    let chartAnimationStart = 0;
-    let chartActive = false;
+    let chartRevealProgress = 0;
+    let scrollVelocity = 0;
+    let lastScrollProgress = 0;
+    let lastScrollSampleTime = performance.now();
+
+    const CHART_WARMUP_PROGRESS = 0.62;
+    const CHART_REVEAL_START = 0.755;
+    const CHART_REVEAL_END = 0.94;
+    const BASE_FOLLOW_AMOUNT = 0.11;
+    const MAX_FOLLOW_AMOUNT = 0.65;
+    const VELOCITY_DECAY = 0.9;
 
     const updateScrollTarget = () => {
       const rectBounds = section.getBoundingClientRect();
       const scrollable = Math.max(section.offsetHeight - window.innerHeight, 1);
-      targetProgress = clamp(-rectBounds.top / scrollable, 0, 1);
+      const nextProgress = clamp(-rectBounds.top / scrollable, 0, 1);
+      const now = performance.now();
+      const elapsed = Math.max(now - lastScrollSampleTime, 16);
+      const deltaProgress = Math.abs(nextProgress - lastScrollProgress);
+      const instantaneousVelocity = deltaProgress / elapsed;
+
+      scrollVelocity = Math.max(scrollVelocity * 0.72, instantaneousVelocity);
+      lastScrollProgress = nextProgress;
+      lastScrollSampleTime = now;
+      targetProgress = nextProgress;
     };
+
+    const getVelocityBoost = () =>
+      clamp(mapRange(scrollVelocity, 0.0004, 0.014, 0, 0.34), 0, 0.34);
 
     const resizeCanvas = () => {
       if (!canvas || !chartShell) return;
@@ -498,48 +565,62 @@
     };
 
     const updateChartState = (progress: number) => {
-      const shouldBeActive = progress >= 0.755;
-      if (shouldBeActive && !chartActive) {
-        chartActive = true;
-        chartAnimationStart = performance.now();
-      } else if (!shouldBeActive && chartActive) {
-        chartActive = false;
-        chartAnimationStart = 0;
-        drawChart(0);
-      }
+      const revealTarget =
+        progress < CHART_WARMUP_PROGRESS
+          ? 0
+          : mapRange(progress, CHART_REVEAL_START, CHART_REVEAL_END, 0, 1);
+      const velocityBoost = getVelocityBoost();
+      const revealFollow = clamp(
+        0.16 + velocityBoost * 1.35 + Math.abs(revealTarget - chartRevealProgress) * 0.42,
+        0.16,
+        0.84
+      );
+
+      chartRevealProgress = lerp(chartRevealProgress, revealTarget, revealFollow);
+      drawChart(chartRevealProgress);
     };
 
-    const render = (time: number) => {
-      smoothProgress = lerp(smoothProgress, targetProgress, 0.11);
+    const render = () => {
+      const velocityBoost = getVelocityBoost();
+      const followAmount = clamp(
+        BASE_FOLLOW_AMOUNT +
+          velocityBoost +
+          Math.abs(targetProgress - smoothProgress) * 0.3,
+        BASE_FOLLOW_AMOUNT,
+        MAX_FOLLOW_AMOUNT
+      );
+
+      smoothProgress = lerp(smoothProgress, targetProgress, followAmount);
+      const revealDriverProgress = Math.max(smoothProgress, targetProgress - 0.035);
+      updateChartState(revealDriverProgress);
+      scrollVelocity *= VELOCITY_DECAY;
 
       const drawProgress = mapRange(smoothProgress, 0, 0.7, 0, 1);
       const strokeWidth = mapRange(smoothProgress, 0.74, 0.75, 1.2, 0.2);
-      const chartOpacity = mapRange(smoothProgress, 0.755, 0.76, 0, 1);
-      const maskOpacity = mapRange(smoothProgress, 0.74, 0.75, 0, 1);
+      const chartOpacity = mapRange(chartRevealProgress, 0, 0.12, 0, 1);
+      const maskOpacity = Math.max(
+        mapRange(smoothProgress, 0.74, 0.75, 0, 1),
+        mapRange(chartRevealProgress, 0, 0.05, 0, 1)
+      );
+      const copyProgress = Math.max(smoothProgress, targetProgress - 0.03);
 
       if (rect) {
         rect.style.strokeDasharray = "1";
         rect.style.strokeDashoffset = `${1 - drawProgress}`;
         rect.style.strokeWidth = `${strokeWidth}`;
-        rect.style.stroke = smoothProgress >= 0.75 ? "#ffffff" : "url(#kaplan-gradient)";
+        rect.style.stroke = revealDriverProgress >= 0.75 ? "#ffffff" : "url(#kaplan-gradient)";
       }
       if (mask) mask.style.opacity = `${maskOpacity}`;
       if (chartShell) chartShell.style.opacity = `${chartOpacity}`;
 
       if (primaryCopy) {
-        primaryCopy.classList.toggle("is-active", smoothProgress < 0.74);
-        primaryCopy.classList.toggle("is-muted", smoothProgress >= 0.74);
-        primaryCopy.classList.toggle("is-hidden", smoothProgress >= 0.76);
+        primaryCopy.classList.toggle("is-active", copyProgress < 0.74);
+        primaryCopy.classList.toggle("is-muted", copyProgress >= 0.74);
+        primaryCopy.classList.toggle("is-hidden", copyProgress >= 0.76);
       }
       if (secondaryCopy) {
-        secondaryCopy.classList.toggle("is-active", smoothProgress >= 0.74);
-        secondaryCopy.classList.toggle("is-muted", smoothProgress < 0.55);
-      }
-
-      updateChartState(smoothProgress);
-      if (chartActive) {
-        const elapsed = time - chartAnimationStart;
-        drawChart(clamp(elapsed / 3500, 0, 1));
+        secondaryCopy.classList.toggle("is-active", copyProgress >= 0.74);
+        secondaryCopy.classList.toggle("is-muted", copyProgress < 0.55);
       }
 
       rafId = window.requestAnimationFrame(render);
@@ -548,7 +629,7 @@
     const onResize = () => {
       updateScrollTarget();
       resizeCanvas();
-      drawChart(chartActive ? 1 : 0);
+      drawChart(chartRevealProgress);
     };
 
     updateScrollTarget();
