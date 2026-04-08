@@ -415,8 +415,10 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
     font-weight: 400;
     text-align: center;
     line-height: 1.2;
+    max-width: 13ch;
     margin-bottom: 40px;
     letter-spacing: -0.02em;
+    text-wrap: balance;
   }
 
   .purple-text {
@@ -446,14 +448,18 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
   .research-question-text {
     color: #9ca3af;
     font-size: 18px;
-    margin-bottom: 30px;
+    max-width: 20ch;
+    margin: 0 auto 30px;
+    text-align: center;
+    line-height: 1.15;
+    text-wrap: balance;
     font-weight: 300;
   }
 
   .search-bar-container {
     width: 100%;
     max-width: 720px;
-    margin-bottom: 30px;
+    margin: 0 auto 30px;
   }
 
   .tags-container {
@@ -519,7 +525,7 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
 
   @media (max-width: 780px) {
     .platform-section-container {
-      padding: 2rem 0.9rem 0;
+      padding: 2rem 0 0;
     }
 
     .page-shell {
@@ -639,6 +645,57 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
       width: 1.35rem;
       height: 2.75rem;
     }
+
+    .platform-outer {
+      padding: 3.5rem 1rem 0;
+      border-radius: 2.5rem 2.5rem 0 0;
+    }
+
+    .platform-heading {
+      max-width: 9ch;
+      margin: 0 auto 2rem;
+      font-size: clamp(2.45rem, 10vw, 3.4rem);
+      line-height: 1.02;
+    }
+
+    .platform-heading br {
+      display: none;
+    }
+
+    .platform-heading .purple-text {
+      white-space: nowrap;
+    }
+
+    .platform-card {
+      max-width: none;
+      padding: 2.5rem 1rem 2rem;
+      border-radius: 2rem 2rem 0 0;
+    }
+
+    .sphere-container {
+      width: min(180px, 48vw);
+      height: min(180px, 48vw);
+      margin-bottom: 1rem;
+    }
+
+    .research-question-text {
+      max-width: 16ch;
+      font-size: 1.15rem;
+    }
+
+    .search-bar-container {
+      max-width: 100%;
+      margin-bottom: 1.25rem;
+    }
+
+    .tags-container {
+      gap: 0.55rem;
+    }
+
+    .tag {
+      justify-content: center;
+      text-align: center;
+    }
   }
 
   @media (max-width: 560px) {
@@ -692,6 +749,38 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
 
     .scroll-prompt {
       margin-top: 5rem;
+    }
+
+    .platform-section-container {
+      padding-top: 1.5rem;
+    }
+
+    .platform-outer {
+      padding: 2.75rem 0 0;
+      border-radius: 2.1rem 2.1rem 0 0;
+    }
+
+    .platform-heading {
+      max-width: 8ch;
+      padding-inline: 1rem;
+      margin-bottom: 1.75rem;
+      font-size: clamp(2.15rem, 11vw, 2.9rem);
+    }
+
+    .platform-card {
+      padding: 2.15rem 1rem 1.6rem;
+      border-radius: 1.75rem 1.75rem 0 0;
+    }
+
+    .research-question-text {
+      max-width: 17ch;
+      font-size: 1rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .search-bar-container {
+      margin-bottom: 1rem;
+      padding-inline: 0.1rem;
     }
   }
 </style>

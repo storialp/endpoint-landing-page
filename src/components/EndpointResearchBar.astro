@@ -49,8 +49,10 @@ const { typingSpeed = 80, deletingSpeed = 60 } = Astro.props;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        min-width: 0;
         border-radius: 12px;
         padding: 0 24px;
+        margin-inline: auto;
         background: white;
         box-shadow: 
             0 1px 2px rgba(0, 0, 0, 0.02),
@@ -79,6 +81,7 @@ const { typingSpeed = 80, deletingSpeed = 60 } = Astro.props;
 
     .research-input-field {
         flex: 1;
+        min-width: 0;
         background: transparent;
         border: none;
         font-size: 16px;
@@ -100,6 +103,7 @@ const { typingSpeed = 80, deletingSpeed = 60 } = Astro.props;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex: 0 0 auto;
         color: #9ca3af;
         margin-left: 12px;
         transition: all 0.3s ease;
@@ -108,6 +112,24 @@ const { typingSpeed = 80, deletingSpeed = 60 } = Astro.props;
     .research-bar-root:hover .arrow-icon-container {
         color: #b091ff;
         transform: translateX(2px);
+    }
+
+    @media (max-width: 560px) {
+        .research-bar-root {
+            height: 56px;
+            padding: 0 18px;
+            border-radius: 10px;
+        }
+
+        .research-input-field {
+            font-size: 15px;
+        }
+
+        .arrow-icon-container {
+            width: 28px;
+            height: 28px;
+            margin-left: 10px;
+        }
     }
 </style>
 
