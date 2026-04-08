@@ -54,8 +54,9 @@
   .kaplan-section {
     position: relative;
     isolation: isolate;
-    width: calc(100% + (var(--shell-inline, 0px) * 2));
-    margin: 2rem 0 0 calc(var(--shell-inline, 0px) * -1);
+    width: 100vw;
+    max-width: 100vw;
+    margin: 2rem calc(50% - 50vw) 0;
     padding: clamp(3.5rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3rem) clamp(5rem, 9vw, 7rem);
     background:
       radial-gradient(circle at 18% 18%, rgba(234, 142, 94, 0.22), transparent 24%),
@@ -282,7 +283,7 @@
 
   @media (max-width: 640px) {
     .kaplan-section {
-      padding: 0 0.9rem;
+      padding: 0;
     }
 
     .kaplan-sticky {
@@ -320,8 +321,8 @@
     }
 
     .kaplan-visual-frame {
-      width: min(72vw, 18rem);
-      height: min(72vw, 18rem);
+      width: min(84vw, 21rem);
+      height: min(84vw, 21rem);
     }
   }
 
@@ -340,8 +341,8 @@
     }
 
     .kaplan-visual-frame {
-      width: min(68vw, 15.5rem);
-      height: min(68vw, 15.5rem);
+      width: min(82vw, 19rem);
+      height: min(82vw, 19rem);
     }
   }
 </style>

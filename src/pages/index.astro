@@ -1,8 +1,8 @@
 ---
 import DnaHelix from "../components/DnaHelix.astro";
 import EndpointNetworkSection from "../components/EndpointNetworkSection.astro";
-import ScrollKaplanSection from "../components/ScrollKaplanSection.astro";
 import EndpointResearchBar from "../components/EndpointResearchBar.astro";
+import ScrollKaplanSection from "../components/ScrollKaplanSection.astro";
 import UnlockPotentialSection from "../components/UnlockPotentialSection.astro";
 import WavyFlowSphere from "../components/WavyFlowSphere.astro";
 ---
@@ -75,8 +75,10 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
       <section class="platform-section-container">
         <div class="platform-outer">
           <h2 class="platform-heading">
-            Enabled via a <span class="purple-text">cutting-edge,</span><br />
-            <span class="purple-text">user-friendly</span> platform
+            <span class="platform-heading-line">Enabled via a</span>
+            <span class="platform-heading-line purple-text">cutting-edge,</span>
+            <span class="platform-heading-line purple-text">user-friendly</span>
+            <span class="platform-heading-line">platform</span>
           </h2>
           <div class="platform-card">
             <div class="sphere-container">
@@ -416,9 +418,14 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
     text-align: center;
     line-height: 1.2;
     max-width: 13ch;
-    margin-bottom: 40px;
+    width: min(100%, 13ch);
+    margin: 0 auto 40px;
     letter-spacing: -0.02em;
     text-wrap: balance;
+  }
+
+  .platform-heading-line {
+    display: block;
   }
 
   .purple-text {
@@ -460,6 +467,7 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
     width: 100%;
     max-width: 720px;
     margin: 0 auto 30px;
+    padding-inline: clamp(0.75rem, 2.6vw, 1.5rem);
   }
 
   .tags-container {
@@ -658,10 +666,6 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
       line-height: 1.02;
     }
 
-    .platform-heading br {
-      display: none;
-    }
-
     .platform-heading .purple-text {
       white-space: nowrap;
     }
@@ -686,6 +690,7 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
     .search-bar-container {
       max-width: 100%;
       margin-bottom: 1.25rem;
+      padding-inline: 0.75rem;
     }
 
     .tags-container {
@@ -780,7 +785,7 @@ import WavyFlowSphere from "../components/WavyFlowSphere.astro";
 
     .search-bar-container {
       margin-bottom: 1rem;
-      padding-inline: 0.1rem;
+      padding-inline: 0.75rem;
     }
   }
 </style>
