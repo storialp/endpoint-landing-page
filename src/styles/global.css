@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:
+    "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --color-endpoint-bg: #f7f4ee;
+  --color-endpoint-ink: #1f1925;
+  --color-endpoint-muted: #3b3340;
+  --color-endpoint-accent: #b091ff;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: clip;
+    color: var(--color-endpoint-ink);
+    font-family: var(--font-sans);
+    background:
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 28%),
+      linear-gradient(180deg, #fbf8f2 0%, var(--color-endpoint-bg) 100%);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.scroll-wheel {
+  animation: scroll-wheel 2.2s ease-in-out infinite;
+}
+
+.research-bar {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.research-bar.is-pulsing {
+  border-color: rgba(176, 145, 255, 0.3);
+  box-shadow:
+    0 0 0 4px rgba(176, 145, 255, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.research-bar:hover {
+  border-color: rgba(176, 145, 255, 0.4);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.research-bar:hover .research-input-field {
+  color: #1f1925;
+}
+
+.research-bar:hover .research-arrow {
+  color: #b091ff;
+  transform: translateX(2px);
+}
+
+.panel-grid-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.18;
+  mix-blend-mode: soft-light;
+}
+
+.unlock-board-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0.8rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.kaplan-section-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 233, 203, 0.22) 18%,
+    rgba(255, 233, 203, 0.58) 50%,
+    rgba(255, 233, 203, 0.22) 82%,
+    transparent 100%
+  );
+  opacity: 0.95;
+}
+
+.kaplan-section-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(247, 244, 238, 0.22) 0%, rgba(247, 244, 238, 0) 10%),
+    linear-gradient(180deg, rgba(11, 8, 14, 0) 76%, rgba(11, 8, 14, 0.5) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.kaplan-sticky-shell::before {
+  content: "";
+  position: absolute;
+  inset: 10% 5%;
+  height: 80%;
+  border-radius: 3rem;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 212, 156, 0.22), transparent 42%),
+    radial-gradient(circle at 80% 32%, rgba(240, 133, 81, 0.14), transparent 35%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.kaplan-line {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(0);
+  transition:
+    color 220ms ease,
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 0ms linear 220ms;
+}
+
+.kaplan-line.is-active {
+  visibility: visible;
+  color: #fff7eb;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+  text-shadow: 0 12px 45px rgba(0, 0, 0, 0.28);
+}
+
+.kaplan-line.is-muted {
+  visibility: hidden;
+  color: rgba(244, 239, 230, 0.15);
+  opacity: 0;
+}
+
+.kaplan-line.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(0);
+  pointer-events: none;
+}
+
+.dna-hexagon {
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
+}
+
+.recruit-highlight,
+.gaps-highlight {
+  fill: #d8d8d8;
+  animation: person-highlight 4.5s steps(1, end) infinite;
+}
+
+.target-pulse {
+  fill: #d8d8d8;
+  animation: target-pulse 2.8s ease-in-out infinite;
+  transform-origin: 30px 45px;
+}
+
+.outcomes-line {
+  stroke-dasharray: 180;
+  stroke-dashoffset: 180;
+  animation: line-draw 4.5s ease-in-out infinite alternate;
+}
+
+.outcomes-square {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: square-float 3.4s ease-in-out infinite;
+}
+
+@keyframes scroll-wheel {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  55% {
+    transform: translate(-50%, 1.15rem);
+    opacity: 0.25;
+  }
+}
+
+@keyframes dna-spin {
+  from {
+    transform: translateZ(40px) rotateY(var(--start));
+  }
+
+  to {
+    transform: translateZ(40px) rotateY(calc(var(--start) + 360deg));
+  }
+}
+
+@keyframes person-highlight {
+  0%,
+  24%,
+  100% {
+    fill: #d8d8d8;
+  }
+
+  25%,
+  78% {
+    fill: #aa8fff;
+  }
+}
+
+@keyframes target-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-1px) scale(1.06);
+  }
+}
+
+@keyframes line-draw {
+  0% {
+    stroke-dashoffset: 180;
+  }
+
+  40%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes square-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-wheel,
+  .dna-rung,
+  .recruit-highlight,
+  .gaps-highlight,
+  .target-pulse,
+  .outcomes-line,
+  .outcomes-square {
+    animation: none !important;
+  }
+
+  .research-bar,
+  .research-arrow,
+  .kaplan-line {
+    transition: none !important;
+  }
+}

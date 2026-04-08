@@ -1,238 +1,148 @@
 ---
 interface Props {
-    typingSpeed?: number;
-    deletingSpeed?: number;
+  typingSpeed?: number;
+  deletingSpeed?: number;
 }
 
 const { typingSpeed = 80, deletingSpeed = 60 } = Astro.props;
 ---
 
 <div
-    id="endpoint-research-bar"
-    class="research-bar-root"
-    data-typing-speed={typingSpeed}
-    data-deleting-speed={deletingSpeed}
+  id="endpoint-research-bar"
+  class="research-bar flex h-14 w-full items-center justify-between overflow-hidden rounded-[10px] border border-black/5 bg-white px-[18px] shadow-[0_1px_2px_rgba(0,0,0,0.02),0_8px_24px_rgba(0,0,0,0.04)] min-[561px]:h-16 min-[561px]:rounded-xl min-[561px]:px-6"
+  data-typing-speed={typingSpeed}
+  data-deleting-speed={deletingSpeed}
 >
-    <!-- Input field -->
-    <input
-        type="text"
-        id="research-input"
-        value="Give Endpoint a study to work on..."
-        readonly
-        class="research-input-field"
-    />
+  <input
+    type="text"
+    id="research-input"
+    value="Give Endpoint a study to work on..."
+    readonly
+    class="research-input-field w-full min-w-0 flex-1 border-none bg-transparent p-0 text-[15px] tracking-[-0.01em] text-gray-600 outline-none min-[561px]:text-base"
+  />
 
-    <!-- Arrow icon on the right -->
-    <div class="arrow-icon-container">
-        <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                d="M5 12H19M19 12L13 6M19 12L13 18"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-        </svg>
-    </div>
+  <div
+    class="research-arrow ml-2.5 flex size-7 shrink-0 items-center justify-center text-gray-400 transition-all duration-300 ease-in-out min-[561px]:ml-3 min-[561px]:size-8"
+  >
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M5 12H19M19 12L13 6M19 12L13 18"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </div>
 </div>
 
-<style>
-    .research-bar-root {
-        width: 100%;
-        height: 64px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-width: 0;
-        border-radius: 12px;
-        padding: 0 24px;
-        margin-inline: auto;
-        background: white;
-        box-shadow: 
-            0 1px 2px rgba(0, 0, 0, 0.02),
-            0 8px 24px rgba(0, 0, 0, 0.04);
-        border: 1px solid rgba(0, 0, 0, 0.04);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .research-bar-root.pulsing {
-        border-color: rgba(176, 145, 255, 0.3);
-        box-shadow: 
-            0 0 0 4px rgba(176, 145, 255, 0.1),
-            0 1px 2px rgba(0, 0, 0, 0.04);
-    }
-
-    .research-bar-root:hover {
-        border-color: rgba(176, 145, 255, 0.4);
-        box-shadow: 
-            0 2px 4px rgba(0, 0, 0, 0.04),
-            0 8px 24px rgba(0, 0, 0, 0.06);
-        transform: translateY(-1px);
-    }
-
-    .research-input-field {
-        flex: 1;
-        min-width: 0;
-        background: transparent;
-        border: none;
-        font-size: 16px;
-        outline: none;
-        color: #4b5563;
-        font-family: inherit;
-        padding: 0;
-        width: 100%;
-        letter-spacing: -0.01em;
-    }
-
-    .research-bar-root:hover .research-input-field {
-        color: #1f1925;
-    }
-
-    .arrow-icon-container {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex: 0 0 auto;
-        color: #9ca3af;
-        margin-left: 12px;
-        transition: all 0.3s ease;
-    }
-
-    .research-bar-root:hover .arrow-icon-container {
-        color: #b091ff;
-        transform: translateX(2px);
-    }
-
-    @media (max-width: 560px) {
-        .research-bar-root {
-            height: 56px;
-            padding: 0 18px;
-            border-radius: 10px;
-        }
-
-        .research-input-field {
-            font-size: 15px;
-        }
-
-        .arrow-icon-container {
-            width: 28px;
-            height: 28px;
-            margin-left: 10px;
-        }
-    }
-</style>
-
 <script>
-    const queries = [
-        "What are OS and PFS rates for ADC-treated mNSCLC patients?",
-        "How does Trodelvy + Keytruda compare to chemo in PD-L1 high mNSCLC?",
-        "What's the ORR of T-DXd in HER2-low breast cancer?",
-        "How does TTF compare between ADCs and TKIs in EGFR+ NSCLC?",
-        "What are outcomes for BPDCN patients on tagraxofusp vs chemo?",
-        "Common treatment sequences for mNSCLC in EU5?",
-        "1L CDK4/6i use in HR+/HER2- breast cancer?",
-        "How often is maintenance used in ovarian cancer?",
-        "Transition rate from induction to HSCT in AML?",
-        "Real-world outcomes for Trop-2 high NSCLC on ADCs?",
-        "PD-L1 status impact on response to CPI?",
-        "Prevalence of T790M mutation at EGFR progression?",
-        "KRAS G12C patients on sotorasib in real-world CRC?",
-        "Grade 3+ AEs in ADC-treated breast cancer?",
-        "ILD incidence: T-DXd vs other HER2 drugs?",
-        "Discontinuation due to AEs on IO?",
-        "BPDCN patients over 65: outcomes?",
-        "% of mNSCLC eligible for KEYNOTE-189 in DE?",
-        "IDH1/2 mutation rate in rAML?",
-        "% of PD-L1 high, treatment-naïve EU5 patients?",
-        "Off-label ADC use for NSCLC by region?",
-        "Time from dx to tx start in TNBC?",
-        "Eligibility for HER3 therapy in 2L NSCLC?",
-        "Can we build a SCA for 2L cholangiocarcinoma?",
-        "Comparator arm for ADC in platinum-resistant OvCa?",
-        "Real-world vs ASCENT/DESTINY-Breast trial patients?",
-    ];
+  const queries = [
+    "What are OS and PFS rates for ADC-treated mNSCLC patients?",
+    "How does Trodelvy + Keytruda compare to chemo in PD-L1 high mNSCLC?",
+    "What's the ORR of T-DXd in HER2-low breast cancer?",
+    "How does TTF compare between ADCs and TKIs in EGFR+ NSCLC?",
+    "What are outcomes for BPDCN patients on tagraxofusp vs chemo?",
+    "Common treatment sequences for mNSCLC in EU5?",
+    "1L CDK4/6i use in HR+/HER2- breast cancer?",
+    "How often is maintenance used in ovarian cancer?",
+    "Transition rate from induction to HSCT in AML?",
+    "Real-world outcomes for Trop-2 high NSCLC on ADCs?",
+    "PD-L1 status impact on response to CPI?",
+    "Prevalence of T790M mutation at EGFR progression?",
+    "KRAS G12C patients on sotorasib in real-world CRC?",
+    "Grade 3+ AEs in ADC-treated breast cancer?",
+    "ILD incidence: T-DXd vs other HER2 drugs?",
+    "Discontinuation due to AEs on IO?",
+    "BPDCN patients over 65: outcomes?",
+    "% of mNSCLC eligible for KEYNOTE-189 in DE?",
+    "IDH1/2 mutation rate in rAML?",
+    "% of PD-L1 high, treatment-naive EU5 patients?",
+    "Off-label ADC use for NSCLC by region?",
+    "Time from dx to tx start in TNBC?",
+    "Eligibility for HER3 therapy in 2L NSCLC?",
+    "Can we build a SCA for 2L cholangiocarcinoma?",
+    "Comparator arm for ADC in platinum-resistant OvCa?",
+    "Real-world vs ASCENT/DESTINY-Breast trial patients?",
+  ];
 
-    function typeOut(text: string, input: HTMLInputElement, delay: number, onComplete: () => void) {
-        let i = 0;
-        const typing = () => {
-            input.value = text.slice(0, i);
-            if (i < text.length) {
-                i++;
-                setTimeout(typing, delay);
-            } else {
-                onComplete();
-            }
-        };
-        typing();
-    }
+  function typeOut(text: string, input: HTMLInputElement, delay: number, onComplete: () => void) {
+    let i = 0;
+    const typing = () => {
+      input.value = text.slice(0, i);
+      if (i < text.length) {
+        i++;
+        setTimeout(typing, delay);
+      } else {
+        onComplete();
+      }
+    };
+    typing();
+  }
 
-    function deleteOut(text: string, input: HTMLInputElement, delay: number, onComplete: () => void) {
-        let i = text.length;
-        const deleting = () => {
-            input.value = text.slice(0, i);
-            if (i > 0) {
-                i--;
-                setTimeout(deleting, delay);
-            } else {
-                onComplete();
-            }
-        };
-        deleting();
-    }
+  function deleteOut(text: string, input: HTMLInputElement, delay: number, onComplete: () => void) {
+    let i = text.length;
+    const deleting = () => {
+      input.value = text.slice(0, i);
+      if (i > 0) {
+        i--;
+        setTimeout(deleting, delay);
+      } else {
+        onComplete();
+      }
+    };
+    deleting();
+  }
 
-    const container = document.getElementById('endpoint-research-bar');
-    const input = document.getElementById('research-input') as HTMLInputElement;
-    const typingSpeed = parseInt(container?.dataset.typingSpeed || '80');
-    const deletingSpeed = parseInt(container?.dataset.deletingSpeed || '60');
+  const container = document.getElementById("endpoint-research-bar");
+  const input = document.getElementById("research-input") as HTMLInputElement | null;
+  const typingSpeed = parseInt(container?.dataset.typingSpeed || "80", 10);
+  const deletingSpeed = parseInt(container?.dataset.deletingSpeed || "60", 10);
 
-    const typingDelay = 100 - typingSpeed;
-    const deletingDelay = 100 - deletingSpeed;
+  const typingDelay = 100 - typingSpeed;
+  const deletingDelay = 100 - deletingSpeed;
 
-    let isCycling = false;
-    let pulseInterval: ReturnType<typeof setInterval> | undefined;
+  let isCycling = false;
+  let pulseInterval: ReturnType<typeof setInterval> | undefined;
 
-    function startPulse() {
-        if (pulseInterval) clearInterval(pulseInterval);
-        pulseInterval = setInterval(() => {
-            container?.classList.toggle('pulsing');
-        }, 2000);
-    }
+  function startPulse() {
+    if (pulseInterval) clearInterval(pulseInterval);
+    pulseInterval = setInterval(() => {
+      container?.classList.toggle("is-pulsing");
+    }, 2000);
+  }
 
-    function stopPulse() {
-        if (pulseInterval) clearInterval(pulseInterval);
-        container?.classList.remove('pulsing');
-    }
+  function stopPulse() {
+    if (pulseInterval) clearInterval(pulseInterval);
+    container?.classList.remove("is-pulsing");
+  }
 
-    startPulse();
-
-    container?.addEventListener('mouseenter', () => {
-        stopPulse();
-        if (!isCycling) {
-            isCycling = true;
-            input.value = "";
-            cycle(0);
-        }
-    });
-
-    function cycle(index: number) {
-        const next = queries[index % queries.length];
-        typeOut(next, input, typingDelay, () => {
-            setTimeout(() => {
-                deleteOut(next, input, deletingDelay, () => {
-                    cycle(index + 1);
-                });
-            }, 500);
+  function cycle(index: number) {
+    if (!input) return;
+    const next = queries[index % queries.length];
+    typeOut(next, input, typingDelay, () => {
+      setTimeout(() => {
+        deleteOut(next, input, deletingDelay, () => {
+          cycle(index + 1);
         });
-    }
+      }, 500);
+    });
+  }
+
+  startPulse();
+
+  container?.addEventListener("mouseenter", () => {
+    stopPulse();
+    if (!input || isCycling) return;
+    isCycling = true;
+    input.value = "";
+    cycle(0);
+  });
 </script>

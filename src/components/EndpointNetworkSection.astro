@@ -1,305 +1,90 @@
-<section class="network-section" aria-labelledby="endpoint-network-heading">
-  <div class="network-shell">
+---
+const pillClass =
+  "relative z-[1] inline-flex items-center gap-[0.85rem] rounded-[0.82rem] px-[1.05rem] py-[0.72rem] text-[clamp(0.8rem,0.95vw,0.95rem)] leading-none font-normal uppercase tracking-[0.02em]";
+---
+
+<section
+  class="bg-endpoint-bg px-3 py-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(5.25rem,10vw,8.25rem)] [background:radial-gradient(circle_at_50%_0%,rgba(176,145,255,0.08),transparent_30%),var(--color-endpoint-bg)]"
+  aria-labelledby="endpoint-network-heading"
+>
+  <div class="mx-auto grid w-full max-w-[1280px] items-stretch gap-[clamp(14px,1.8vw,22px)] min-[961px]:grid-cols-[minmax(0,1.58fr)_minmax(280px,0.64fr)]">
     <h2 id="endpoint-network-heading" class="sr-only">
       Endpoint data network and therapeutic areas
     </h2>
 
-    <article class="network-panel network-stats">
-      <p class="network-pill">
-        <span class="pill-dot" aria-hidden="true"></span>
+    <article
+      class="panel-grid-overlay relative overflow-hidden rounded-[1.6rem] bg-[#1c1621] p-[clamp(1.8rem,3vw,2.45rem)] shadow-[0_30px_70px_rgba(20,11,26,0.18),inset_0_1px_0_rgba(255,255,255,0.04)] min-[701px]:rounded-[2rem] [background:radial-gradient(circle_at_top_center,rgba(176,145,255,0.1),transparent_38%),radial-gradient(circle_at_80%_80%,rgba(176,145,255,0.06),transparent_22%),#1c1621] min-h-[clamp(26rem,44vw,34rem)] min-[961px]:min-h-[clamp(26rem,44vw,34rem)]"
+    >
+      <p class:list={[pillClass, "m-0 bg-[rgba(67,49,73,0.96)] text-[#f6eef9]"]}>
+        <span
+          class="size-[0.66rem] shrink-0 rounded-full bg-[#b091ff] shadow-[0_0_0_0.24rem_rgba(176,145,255,0.24)]"
+          aria-hidden="true"
+        ></span>
         THE ENDPOINT DATA NETWORK
       </p>
 
-      <div class="metric-grid">
-        <div class="metric-card">
-          <p class="metric-label">Unique patients in network</p>
-          <p class="metric-value">25M</p>
+      <div class="relative z-[1] mt-[clamp(2.2rem,5vw,3.75rem)] grid h-auto gap-8 min-h-[22rem] min-[701px]:h-[calc(100%-5rem)] min-[701px]:gap-0 min-[701px]:grid-cols-1 min-[961px]:grid-cols-[minmax(0,1.32fr)_minmax(240px,0.68fr)]">
+        <div class="flex min-h-56 flex-col justify-between gap-6 border-l-[3px] border-l-[rgba(176,145,255,0.85)] px-[clamp(1.8rem,2.6vw,2.55rem)] pb-0 pt-0 min-[701px]:pb-[1.1rem]">
+          <p class="m-0 max-w-[15ch] text-balance font-mono text-[clamp(1.35rem,2.6vw,2rem)] leading-[1.1] tracking-[-0.045em] text-[#ad92ff]">
+            Unique patients in network
+          </p>
+          <p class="m-0 text-[clamp(5rem,10vw,8rem)] leading-[0.84] font-medium tracking-[-0.08em] text-[#ad92ff]">
+            25M
+          </p>
         </div>
 
-        <div class="metric-card metric-card-secondary">
-          <p class="metric-label">Countries</p>
-          <p class="metric-value">8</p>
+        <div class="flex min-h-56 flex-col justify-between gap-6 border-l-[3px] border-l-[rgba(176,145,255,0.85)] px-[clamp(1.8rem,2.6vw,2.55rem)] pb-0 pt-0 min-[701px]:pb-[1.1rem] min-[961px]:pr-[clamp(0.5rem,1.6vw,1.1rem)]">
+          <p class="m-0 max-w-[15ch] text-balance font-mono text-[clamp(1.35rem,2.6vw,2rem)] leading-[1.1] tracking-[-0.045em] text-[#ad92ff]">
+            Countries
+          </p>
+          <p class="m-0 text-[clamp(5rem,10vw,8rem)] leading-[0.84] font-medium tracking-[-0.08em] text-[#ad92ff]">
+            8
+          </p>
         </div>
       </div>
     </article>
 
-    <aside class="network-panel therapy-panel" aria-label="Therapeutic areas covered">
-      <p class="network-pill therapy-pill">
-        <span class="pill-dot" aria-hidden="true"></span>
+    <aside
+      class="panel-grid-overlay relative overflow-hidden rounded-[1.6rem] bg-[#9d82f2] p-[clamp(1.8rem,3vw,2.2rem)] shadow-[0_30px_70px_rgba(109,82,181,0.18),inset_0_1px_0_rgba(255,255,255,0.22)] min-[701px]:rounded-[2rem] [background:radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_28%),linear-gradient(180deg,#9d82f2_0%,#9c80ee_100%)] min-h-[clamp(26rem,44vw,34rem)] min-[961px]:min-h-[clamp(26rem,44vw,34rem)]"
+      aria-label="Therapeutic areas covered"
+    >
+      <p class:list={[pillClass, "m-0 bg-[rgba(51,30,53,0.92)] text-[#f3ebff]"]}>
+        <span
+          class="size-[0.66rem] shrink-0 rounded-full bg-[#b091ff] shadow-[0_0_0_0.24rem_rgba(176,145,255,0.24)]"
+          aria-hidden="true"
+        ></span>
         THERAPEUTIC AREAS
       </p>
 
-      <ul class="therapy-list" role="list">
-        <li class="therapy-item">
-          <img class="therapy-icon" src="/icons/cancer.svg" alt="" aria-hidden="true" loading="lazy" />
-          <p class="therapy-name">Cancer</p>
+      <ul
+        class="relative z-[1] mt-[clamp(2rem,4.8vw,3.25rem)] grid h-auto list-none gap-y-[2.2rem] px-0 min-[701px]:gap-y-[1.6rem] min-[701px]:max-[960px]:grid-cols-3 min-[701px]:max-[960px]:gap-x-4 min-[701px]:max-[960px]:gap-y-8 min-[961px]:h-[calc(100%-4.5rem)] min-[961px]:content-between min-[961px]:grid-cols-1"
+        role="list"
+      >
+        <li class="grid justify-items-center gap-3 text-center transition-transform duration-200 ease-out hover:-translate-y-0.5">
+          <img class="block h-auto w-[clamp(4.8rem,6.2vw,5.4rem)]" src="/icons/cancer.svg" alt="" aria-hidden="true" loading="lazy" />
+          <p class="m-0 text-balance font-mono text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.05] tracking-[-0.045em] text-[#1c1621]">
+            Cancer
+          </p>
         </li>
-        <li class="therapy-item">
-          <img class="therapy-icon" src="/icons/virology.svg" alt="" aria-hidden="true" loading="lazy" />
-          <p class="therapy-name">Virology</p>
+        <li class="grid justify-items-center gap-3 text-center transition-transform duration-200 ease-out hover:-translate-y-0.5">
+          <img class="block h-auto w-[clamp(4.8rem,6.2vw,5.4rem)]" src="/icons/virology.svg" alt="" aria-hidden="true" loading="lazy" />
+          <p class="m-0 text-balance font-mono text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.05] tracking-[-0.045em] text-[#1c1621]">
+            Virology
+          </p>
         </li>
-        <li class="therapy-item therapy-item-metabolic">
+        <li class="grid justify-items-center gap-3 text-center transition-transform duration-200 ease-out hover:-translate-y-0.5">
           <img
-            class="therapy-icon"
+            class="block h-auto w-[clamp(4.8rem,6.2vw,5.4rem)]"
             src="/icons/metabolic-disease.svg"
             alt=""
             aria-hidden="true"
             loading="lazy"
           />
-          <p class="therapy-name">Metabolic disease</p>
+          <p class="m-0 max-w-[11ch] text-balance font-mono text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.05] tracking-[-0.045em] text-[#1c1621] min-[701px]:max-w-none min-[961px]:max-w-[11ch]">
+            Metabolic disease
+          </p>
         </li>
       </ul>
     </aside>
   </div>
 </section>
-
-<style>
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .network-section {
-    padding: clamp(4.5rem, 9vw, 7.5rem) 12px clamp(5.25rem, 10vw, 8.25rem);
-    background:
-      radial-gradient(circle at 50% 0%, rgba(176, 145, 255, 0.08), transparent 30%),
-      var(--bg);
-  }
-
-  .network-shell {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1.58fr) minmax(280px, 0.64fr);
-    gap: clamp(14px, 1.8vw, 22px);
-    align-items: stretch;
-  }
-
-  .network-panel {
-    position: relative;
-    overflow: hidden;
-    border-radius: 2rem;
-  }
-
-  .network-panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-    background-size: 44px 44px;
-    opacity: 0.18;
-    mix-blend-mode: soft-light;
-  }
-
-  .network-stats {
-    min-height: clamp(26rem, 44vw, 34rem);
-    padding: clamp(1.8rem, 3vw, 2.45rem);
-    background:
-      radial-gradient(circle at top center, rgba(176, 145, 255, 0.1), transparent 38%),
-      radial-gradient(circle at 80% 80%, rgba(176, 145, 255, 0.06), transparent 22%),
-      #1c1621;
-    box-shadow:
-      0 30px 70px rgba(20, 11, 26, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  }
-
-  .therapy-panel {
-    min-height: clamp(26rem, 44vw, 34rem);
-    padding: clamp(1.8rem, 3vw, 2.2rem);
-    background:
-      radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 28%),
-      linear-gradient(180deg, #9d82f2 0%, #9c80ee 100%);
-    box-shadow:
-      0 30px 70px rgba(109, 82, 181, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  }
-
-  .network-pill {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.85rem;
-    margin: 0;
-    padding: 0.72rem 1.05rem;
-    border-radius: 0.82rem;
-    background: rgba(67, 49, 73, 0.96);
-    color: #f6eef9;
-    font-size: clamp(0.8rem, 0.95vw, 0.95rem);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    line-height: 1;
-    font-weight: 400;
-  }
-
-  .therapy-pill {
-    background: rgba(51, 30, 53, 0.92);
-    color: #f3ebff;
-  }
-
-  .pill-dot {
-    width: 0.66rem;
-    height: 0.66rem;
-    border-radius: 999px;
-    background: #b091ff;
-    box-shadow: 0 0 0 0.24rem rgba(176, 145, 255, 0.24);
-    flex: 0 0 auto;
-  }
-
-  .metric-grid {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(0, 1.32fr) minmax(240px, 0.68fr);
-    gap: 0;
-    height: calc(100% - 5rem);
-    margin-top: clamp(2.2rem, 5vw, 3.75rem);
-  }
-
-  .metric-card {
-    display: flex;
-    min-height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding: 0 clamp(1.2rem, 2vw, 2rem) 1.1rem clamp(1.8rem, 2.6vw, 2.55rem);
-    border-left: 3px solid rgba(176, 145, 255, 0.85);
-  }
-
-  .metric-card-secondary {
-    padding-right: clamp(0.5rem, 1.6vw, 1.1rem);
-  }
-
-  .metric-label {
-    margin: 0;
-    color: #ad92ff;
-    font-family: "IBM Plex Mono", "IBM Plex Sans", monospace;
-    font-size: clamp(1.35rem, 2.6vw, 2rem);
-    line-height: 1.1;
-    letter-spacing: -0.045em;
-    max-width: 15ch;
-    text-wrap: balance;
-  }
-
-  .metric-value {
-    margin: 0;
-    color: #ad92ff;
-    font-size: clamp(5rem, 10vw, 8rem);
-    line-height: 0.84;
-    letter-spacing: -0.08em;
-    font-weight: 500;
-  }
-
-  .therapy-list {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    height: calc(100% - 4.5rem);
-    margin: clamp(2rem, 4.8vw, 3.25rem) 0 0;
-    padding: 0;
-    list-style: none;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.6rem;
-  }
-
-  .therapy-item {
-    display: grid;
-    justify-items: center;
-    gap: 0.95rem;
-    text-align: center;
-    transition: transform 220ms ease;
-  }
-
-  .therapy-item:hover {
-    transform: translateY(-2px);
-  }
-
-  .therapy-icon {
-    display: block;
-    width: clamp(4.8rem, 6.2vw, 5.4rem);
-    height: auto;
-  }
-
-  .therapy-name {
-    margin: 0;
-    color: #1c1621;
-    font-family: "IBM Plex Mono", "IBM Plex Sans", monospace;
-    font-size: clamp(1.5rem, 2.2vw, 2rem);
-    line-height: 1.05;
-    letter-spacing: -0.045em;
-    text-wrap: balance;
-  }
-
-  .therapy-item-metabolic .therapy-name {
-    max-width: 11ch;
-  }
-
-  @media (max-width: 960px) {
-    .network-shell {
-      grid-template-columns: 1fr;
-    }
-
-    .network-stats,
-    .therapy-panel {
-      min-height: 0;
-    }
-
-    .metric-grid {
-      min-height: 22rem;
-    }
-
-    .therapy-list {
-      height: auto;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 2rem 1rem;
-      align-items: start;
-    }
-  }
-
-  @media (max-width: 700px) {
-    .network-panel {
-      border-radius: 1.6rem;
-    }
-
-    .metric-grid {
-      grid-template-columns: 1fr;
-      height: auto;
-      gap: 2rem;
-    }
-
-    .metric-card {
-      min-height: 14rem;
-      padding-bottom: 0;
-    }
-
-    .metric-card-secondary {
-      padding-right: clamp(1.2rem, 2vw, 2rem);
-    }
-
-    .therapy-list {
-      grid-template-columns: 1fr;
-      gap: 2.2rem;
-    }
-
-    .therapy-item {
-      gap: 0.75rem;
-    }
-
-    .therapy-name {
-      max-width: none;
-    }
-  }
-</style>

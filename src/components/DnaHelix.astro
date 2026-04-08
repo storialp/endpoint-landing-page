@@ -53,23 +53,31 @@ const rungs = Array.from({ length: numRungs }, (_, i) => {
 });
 ---
 
-<div class="helix-frame" aria-hidden="true">
-  <div class="helix-body">
+<div class="relative mx-auto aspect-[260/420] w-full max-w-96 overflow-visible [perspective:1000px]" aria-hidden="true">
+  <div class="absolute inset-0 [transform-style:preserve-3d] [transform:translateZ(-80px)]">
     {
       rungs.map((rung) => (
         <div
-          class="helix-rung"
-          style={`top:${rung.y}px;width:${rung.width}px;margin-left:${-rung.width / 2}px;--start:${rung.off}deg;animation-delay:${rung.delay}s;`}
+          class="dna-rung absolute left-1/2 [transform-style:preserve-3d] will-change-transform"
+          style={`top:${rung.y}px;width:${rung.width}px;height:${lineWidth}px;margin-left:${-rung.width / 2}px;background:${lineColor};--start:${rung.off}deg;animation:dna-spin ${duration}s linear infinite;animation-delay:${rung.delay}s;`}
         >
           {rung.lShape !== "none" && (
             <span
-              class:list={["shape", "shape-left", rung.lShape]}
+              class:list={[
+                "absolute block size-6",
+                rung.lShape === "circle" && "rounded-full",
+                rung.lShape === "hexagon" && "dna-hexagon",
+              ]}
               style={`background:${rung.lCol};top:${-(shapeSize / 2) + lineWidth / 2}px;left:${-shapeSize}px;`}
             />
           )}
           {rung.rShape !== "none" && (
             <span
-              class:list={["shape", "shape-right", rung.rShape]}
+              class:list={[
+                "absolute block size-6",
+                rung.rShape === "circle" && "rounded-full",
+                rung.rShape === "hexagon" && "dna-hexagon",
+              ]}
               style={`background:${rung.rCol};top:${-(shapeSize / 2) + lineWidth / 2}px;right:${-shapeSize}px;`}
             />
           )}
@@ -78,62 +86,3 @@ const rungs = Array.from({ length: numRungs }, (_, i) => {
     }
   </div>
 </div>
-
-<style define:vars={{ height: `${height}px`, width: `${width}px`, lineColor, lineWidth: `${lineWidth}px`, shapeSize: `${shapeSize}px`, duration: `${duration}s` }}>
-  .helix-frame {
-    position: relative;
-    width: min(100%, 24rem);
-    aspect-ratio: 260 / 420;
-    margin: 0 auto;
-    perspective: 1000px;
-    overflow: visible;
-  }
-
-  .helix-body {
-    position: absolute;
-    inset: 0;
-    transform-style: preserve-3d;
-    transform: translateZ(-80px);
-  }
-
-  .helix-rung {
-    position: absolute;
-    left: 50%;
-    height: var(--lineWidth);
-    background: var(--lineColor);
-    transform-style: preserve-3d;
-    will-change: transform;
-    animation: spin var(--duration) linear infinite;
-  }
-
-  .shape {
-    position: absolute;
-    display: block;
-    width: var(--shapeSize);
-    height: var(--shapeSize);
-  }
-
-  .circle {
-    border-radius: 999px;
-  }
-
-  .hexagon {
-    clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
-  }
-
-  @keyframes spin {
-    from {
-      transform: translateZ(40px) rotateY(var(--start));
-    }
-
-    to {
-      transform: translateZ(40px) rotateY(calc(var(--start) + 360deg));
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .helix-rung {
-      animation: none;
-    }
-  }
-</style>
